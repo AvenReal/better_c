@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['name_0',['Name',['../md_README.html#autotoc_md15',1,'&lt;span class=&quot;tt&quot;&gt;DEFINE_RESULT_NAMED(Type, Name)&lt;/span&gt;'],['../md_README.html#autotoc_md25',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_ERR(...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)&lt;/span&gt;'],['../md_README.html#autotoc_md24',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK(Type, Var, Expr)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED(Type, Var, Expr, Name)&lt;/span&gt;'],['../md_README.html#autotoc_md26',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_OR(Type, Var, Expr, ...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED_OR(Type, Var, Expr, Name, ...)&lt;/span&gt;'],['../md_README.html#autotoc_md27',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_OR_ELSE(Type, Var, Expr, ...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED_OR_ELSE(Type, Var, Expr, Name, ...)&lt;/span&gt;'],['../md_README.html#autotoc_md18',1,'&lt;span class=&quot;tt&quot;&gt;RESULT(Name)&lt;/span&gt;']]],
+  ['name_20and_20define_5fresult_5funion_20name_20type_1',['&lt;span class=&quot;tt&quot;&gt;RESULT_UNION(Name)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;DEFINE_RESULT_UNION(Name, Type)&lt;/span&gt;',['../md_README.html#autotoc_md13',1,'']]],
+  ['name_20code_20message_2',['&lt;span class=&quot;tt&quot;&gt;SET_RESULT_ERR(Name, Code, Message)&lt;/span&gt;',['../md_README.html#autotoc_md20',1,'']]],
+  ['name_20constructors_20predicates_3',['Result Type Name, Constructors &amp;amp; Predicates',['../md_README.html#autotoc_md17',1,'']]],
+  ['name_20type_4',['&lt;span class=&quot;tt&quot;&gt;RESULT_UNION(Name)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;DEFINE_RESULT_UNION(Name, Type)&lt;/span&gt;',['../md_README.html#autotoc_md13',1,'']]],
+  ['name_20value_5',['&lt;span class=&quot;tt&quot;&gt;SET_RESULT_OK(Name, Value)&lt;/span&gt;',['../md_README.html#autotoc_md19',1,'']]],
+  ['nested_5fbox_6',['nested_box',['../structnested__box.html',1,'']]]
+];

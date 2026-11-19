@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['enum_20error_5fcode_0',['&lt;span class=&quot;tt&quot;&gt;enum error_code&lt;/span&gt;',['../md_README.html#autotoc_md5',1,'']]],
+  ['error_20h_20macros_20types_1',['&lt;span class=&quot;tt&quot;&gt;error.h&lt;/span&gt; Macros &amp;amp; Types',['../md_README.html#autotoc_md3',1,'']]],
+  ['error_5fcode_2',['&lt;span class=&quot;tt&quot;&gt;enum error_code&lt;/span&gt;',['../md_README.html#autotoc_md5',1,'']]],
+  ['example_3',['Complete Example',['../md_README.html#autotoc_md29',1,'']]],
+  ['expr_20and_20get_5fresult_5fok_5fnamed_20type_20var_20expr_20name_4',['&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK(Type, Var, Expr)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED(Type, Var, Expr, Name)&lt;/span&gt;',['../md_README.html#autotoc_md24',1,'']]],
+  ['expr_20and_20get_5fresult_5fok_5fnamed_5for_20type_20var_20expr_20name_5',['&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_OR(Type, Var, Expr, ...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED_OR(Type, Var, Expr, Name, ...)&lt;/span&gt;',['../md_README.html#autotoc_md26',1,'']]],
+  ['expr_20and_20get_5fresult_5fok_5fnamed_5for_5felse_20type_20var_20expr_20name_6',['&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_OR_ELSE(Type, Var, Expr, ...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED_OR_ELSE(Type, Var, Expr, Name, ...)&lt;/span&gt;',['../md_README.html#autotoc_md27',1,'']]],
+  ['expr_20name_7',['Expr Name',['../md_README.html#autotoc_md25',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_ERR(...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)&lt;/span&gt;'],['../md_README.html#autotoc_md24',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK(Type, Var, Expr)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED(Type, Var, Expr, Name)&lt;/span&gt;'],['../md_README.html#autotoc_md26',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_OR(Type, Var, Expr, ...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED_OR(Type, Var, Expr, Name, ...)&lt;/span&gt;'],['../md_README.html#autotoc_md27',1,'&lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_OR_ELSE(Type, Var, Expr, ...)&lt;/span&gt; and &lt;span class=&quot;tt&quot;&gt;GET_RESULT_OK_NAMED_OR_ELSE(Type, Var, Expr, Name, ...)&lt;/span&gt;']]]
+];
