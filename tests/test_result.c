@@ -1,12 +1,3 @@
-/**
- * @file test_better_c.c
- * @brief Comprehensive test suite for the better_c macro library.
- *
- * Tests Result definitions, constructors, predicates, unwrapping macros,
- * error handling, and process termination across various C types.
- */
-
-/** @brief POSIX C source version macro. */
 #define _POSIX_C_SOURCE 200809L
 
 #include <assert.h>
@@ -19,120 +10,40 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#include "better_c.h"
+#include "result.h"
 
-#ifndef GET_RESULT_ERR
-/** @cond INTERNAL */
-#    define _GET_RESULT_ERR_1(Res) ((Res).value.err)
-#    define _GET_RESULT_ERR_3(Type, Var, Expr)                                 \
-        RESULT(Type) Var##_result = (Expr);                                    \
-        if (RESULT_IS_OK(Var##_result))                                        \
-        {                                                                      \
-            THROW_ERROR(ERR_RESULT_IS_OK,                                      \
-                        "Tried to get err of " #Expr " but it's an ok.");      \
-        }                                                                      \
-        const char *Var = Var##_result.value.err;
-#    define _GET_RESULT_ERR_4(Type, Var, Expr, Name)                           \
-        RESULT(Name) Var##_result = (Expr);                                    \
-        if (RESULT_IS_OK(Var##_result))                                        \
-        {                                                                      \
-            THROW_ERROR(ERR_RESULT_IS_OK,                                      \
-                        "Tried to get err of " #Expr " but it's an ok.");      \
-        }                                                                      \
-        const char *Var = Var##_result.value.err;
-#    define _GET_RESULT_ERR_CHOOSER(_1, _2, _3, _4, NAME, ...) NAME
-/** @endcond */
-
-/**
- * @brief Retrieve or unwrap the error message from a Result.
- *
- * When passed a single argument `GET_RESULT_ERR(Res)`, retrieves the `const char *`
- * error string from the result variable without accessing union members directly.
- * When passed three arguments `GET_RESULT_ERR(Type, Var, Expr)` or four arguments
- * `GET_RESULT_ERR(Type, Var, Expr, Name)`, evaluates `Expr` and unwraps the error
- * message into `const char *Var`, throwing `ERR_RESULT_IS_OK` if `Expr` was successful.
- *
- * @param ... Variable arguments: either `(Res)` for 1-arg inspection, or `(Type, Var, Expr)`
- *            / `(Type, Var, Expr, Name)` for statement unwrapping.
- */
-#    define GET_RESULT_ERR(...)                                                \
-        _GET_RESULT_ERR_CHOOSER(__VA_ARGS__, _GET_RESULT_ERR_4,                \
-                                _GET_RESULT_ERR_3, _unused,                    \
-                                _GET_RESULT_ERR_1, 0)(__VA_ARGS__)
-#endif
-
-#undef GET_RESULT_ERR_NAMED
-/**
- * @brief Unwrap a named Result's error message into @p Var.
- *
- * Evaluates @p Expr and assigns its error string to `const char *Var`.
- * If @p Expr evaluated to an OK Result, terminates via THROW_ERROR with `ERR_RESULT_IS_OK`.
- *
- * @param Type Single-word or named Result type of the ok payload.
- * @param Var  Identifier to declare for the error string (`const char *Var`).
- * @param Expr Expression yielding a RESULT(Name).
- * @param Name Result type name suffix.
- */
-#define GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)                            \
-    RESULT(Name) Var##_result = (Expr);                                        \
-    if (RESULT_IS_OK(Var##_result))                                            \
-    {                                                                          \
-        THROW_ERROR(ERR_RESULT_IS_OK,                                          \
-                    "Tried to get err of " #Expr " but it's an ok.");          \
-    }                                                                          \
-    const char *Var = Var##_result.value.err;
-
-
-/**
- * @brief Forward-declared incomplete struct to test opaque struct pointer results.
- */
 struct opaque_handle;
 
-/**
- * @brief Test color enumeration.
- */
 enum color
 {
-    COLOR_RED = 10,   /**< Red test color. */
-    COLOR_GREEN = 20, /**< Green test color. */
-    COLOR_BLUE = 30,  /**< Blue test color. */
+    COLOR_RED = 10,
+    COLOR_GREEN = 20,
+    COLOR_BLUE = 30,
 };
 
-/**
- * @brief 2D point test structure.
- */
 struct point
 {
-    int x; /**< X-coordinate. */
-    int y; /**< Y-coordinate. */
+    int x;
+    int y;
 };
 
-/**
- * @brief Nested box structure containing a point.
- */
 struct nested_box
 {
-    struct point origin; /**< Origin point coordinates. */
-    int width;           /**< Box width. */
-    int height;          /**< Box height. */
+    struct point origin;
+    int width;
+    int height;
 };
 
-/**
- * @brief Union payload for testing union Result types.
- */
 union payload
 {
-    int as_int;       /**< Integer representation. */
-    double as_double; /**< Double representation. */
+    int as_int;
+    double as_double;
 };
 
-/**
- * @brief Read-only record containing a const member.
- */
 struct ro_record
 {
-    const int id; /**< Constant identifier. */
-    int value;    /**< Mutable integer value. */
+    const int id;
+    int value;
 };
 
 /* Exercise DEFINE_RESULT and DEFINE_RESULT_NAMED across C type categories */
@@ -159,15 +70,6 @@ DEFINE_RESULT_NAMED(int **, int_ptr_ptr)
 DEFINE_RESULT_NAMED(struct point **, point_ptr_ptr)
 DEFINE_RESULT_NAMED(int ***, int_ptr_ptr_ptr)
 
-/**
- * @brief Divide two integers and return a RESULT(int).
- *
- * Returns success with quotient, or ERR_INVALID_ARGUMENT on division by zero.
- *
- * @param a Numerator.
- * @param b Denominator.
- * @return RESULT(int) with quotient on success, or ERR_INVALID_ARGUMENT on error.
- */
 static RESULT(int) divide(int a, int b)
 {
     if (b == 0)
@@ -177,74 +79,38 @@ static RESULT(int) divide(int a, int b)
     return SET_RESULT_OK(int, a / b);
 }
 
-/**
- * @brief Return a failing point Result.
- *
- * @return Failing RESULT(point) with ERR_INVALID_ARGUMENT.
- */
 static RESULT(point) fail_point(void)
 {
     return SET_RESULT_ERR(point, ERR_INVALID_ARGUMENT, "Point creation failed");
 }
 
-/**
- * @brief Return an error Result with a NULL message.
- *
- * @return Failing RESULT(int) with ERR_MEMORY_ERROR and NULL message string.
- */
 static RESULT(int) fail_null_msg(void)
 {
     return SET_RESULT_ERR(int, ERR_MEMORY_ERROR, NULL);
 }
 
-/** @brief Counter tracking side-effect calls. */
 static int side_effect_calls = 0;
 
-/**
- * @brief Return an OK result while incrementing side-effect call count.
- *
- * @param v Value to store in Result.
- * @return RESULT(int) holding v.
- */
 static RESULT(int) counted_ok(int v)
 {
     side_effect_calls++;
     return SET_RESULT_OK(int, v);
 }
 
-/**
- * @brief Return an error result while incrementing side-effect call count.
- *
- * @return Failing RESULT(int) with ERR_INVALID_ARGUMENT.
- */
 static RESULT(int) counted_err(void)
 {
     side_effect_calls++;
     return SET_RESULT_ERR(int, ERR_INVALID_ARGUMENT, "counted failure");
 }
 
-/** @brief Counter tracking default evaluation calls. */
 static int default_eval_calls = 0;
 
-/**
- * @brief Compute default value and track call count.
- *
- * @return Default integer value 999.
- */
 static int compute_default(void)
 {
     default_eval_calls++;
     return 999;
 }
 
-/**
- * @brief Run a function in a child process and inspect its exit code and stderr.
- *
- * @param fn Function to execute in child process.
- * @param stderr_buf Buffer to store captured stderr output.
- * @param buf_size Size of @p stderr_buf.
- * @return Exit status code of the child process.
- */
 static int run_expect_exit(void (*fn)(void), char *stderr_buf, size_t buf_size)
 {
     int pipefd[2];
@@ -285,35 +151,18 @@ static int run_expect_exit(void (*fn)(void), char *stderr_buf, size_t buf_size)
     return WEXITSTATUS(status);
 }
 
-/**
- * @brief Child action throwing a plain error.
- */
-static void child_throw_plain(void)
-{
-    THROW_ERROR(ERR_MEMORY_ERROR, "plain message");
-}
-
-/**
- * @brief Child action unwrapping an error using GET_RESULT_OK.
- */
 static void child_get_result_throws(void)
 {
     GET_RESULT_OK(int, x, divide(1, 0))
     (void)x;
 }
 
-/**
- * @brief Child action unwrapping an error using GET_RESULT_OK_NAMED.
- */
 static void child_get_result_named_throws(void)
 {
     GET_RESULT_OK_NAMED(struct point, pt, fail_point(), point)
     (void)pt;
 }
 
-/**
- * @brief Child action re-throwing inside GET_RESULT_OK_OR_ELSE.
- */
 static void child_or_else_rethrow(void)
 {
     GET_RESULT_OK_OR_ELSE(
@@ -323,9 +172,6 @@ static void child_or_else_rethrow(void)
     (void)x;
 }
 
-/**
- * @brief Child action leaving an error unhandled in GET_RESULT_OK_OR_ELSE.
- */
 static void child_or_else_unhandled_throws(void)
 {
     /* Falling through without recovering or transferring control must throw */
@@ -333,18 +179,12 @@ static void child_or_else_unhandled_throws(void)
     (void)x;
 }
 
-/**
- * @brief Child action testing GET_RESULT_ERR throwing on an OK Result.
- */
 static void child_get_result_err_on_ok_throws(void)
 {
     GET_RESULT_ERR(int, err_msg, divide(10, 2))
     (void)err_msg;
 }
 
-/**
- * @brief Child action testing GET_RESULT_ERR_NAMED throwing on an OK Result.
- */
 static void child_get_result_err_named_on_ok_throws(void)
 {
     GET_RESULT_ERR_NAMED(struct point, err_msg,
@@ -352,9 +192,6 @@ static void child_get_result_err_named_on_ok_throws(void)
     (void)err_msg;
 }
 
-/**
- * @brief Child action testing GET_RESULT_ERR with 4 arguments throwing on an OK Result.
- */
 static void child_get_result_err_4arg_on_ok_throws(void)
 {
     GET_RESULT_ERR(struct point, err_msg,
@@ -362,26 +199,6 @@ static void child_get_result_err_4arg_on_ok_throws(void)
     (void)err_msg;
 }
 
-/**
- * @brief Child action failing an ASSERT check.
- */
-static void child_assert_fails(void)
-{
-    ASSERT(1 == 0, "assert plain message");
-}
-
-/**
- * @brief Child action failing an ASSERT_FMT check.
- */
-static void child_assert_fmt_fails(void)
-{
-    ASSERT_FMT(1 == 0, "assert fmt message: %d", 42);
-}
-
-
-/**
- * @brief Test defining and unwrapping Results across various C types.
- */
 static void test_define_result_all_types(void)
 {
     /* Primitives & multi-word & const */
@@ -450,7 +267,6 @@ static void test_define_result_all_types(void)
                            payload, ((union payload){ .as_int = 555 }))
     assert(pl_fallback.as_int == 555);
 
-
     /* Unions & union pointers */
     union payload pl = { .as_int = 99 };
     GET_RESULT_OK_NAMED(union payload, pl_out, SET_RESULT_OK(payload, pl),
@@ -518,24 +334,12 @@ static void test_define_result_all_types(void)
     assert(RESULT_IS_ERR(coerced_res) && coerced_res.status == ERR_UNKNOWN);
 }
 
-/**
- * @brief Helper demonstrating returning early on error.
- *
- * @param denom Denominator.
- * @return Quotient or -1 on error.
- */
 static int helper_return_on_error(int denom)
 {
     GET_RESULT_OK_OR_ELSE(int, q, divide(10, denom), return -1;)
     return q;
 }
 
-/**
- * @brief Helper demonstrating error block with commas.
- *
- * @param denom Denominator.
- * @return Quotient or computed error fallback.
- */
 static int helper_block_with_commas(int denom)
 {
     GET_RESULT_OK_OR_ELSE(int, q, divide(10, denom), {
@@ -545,12 +349,6 @@ static int helper_block_with_commas(int denom)
     return q;
 }
 
-/**
- * @brief Helper demonstrating unparenthesized commas in error statement.
- *
- * @param denom Denominator.
- * @return Quotient or computed error fallback.
- */
 static int helper_unparenthesized_commas(int denom)
 {
     GET_RESULT_OK_OR_ELSE(int, q, divide(10, denom), int a = 3, b = 4;
@@ -558,14 +356,6 @@ static int helper_unparenthesized_commas(int denom)
     return q;
 }
 
-/**
- * @brief Helper demonstrating inspecting error status and message via GET_RESULT_ERR.
- *
- * @param denom Denominator.
- * @param out_code Pointer to store observed error code.
- * @param out_msg Pointer to store observed error message.
- * @return Quotient or -99 on error.
- */
 static int helper_or_else_inspect(int denom, enum error_code *out_code,
                                   const char **out_msg)
 {
@@ -577,9 +367,6 @@ static int helper_or_else_inspect(int denom, enum error_code *out_code,
     return q;
 }
 
-/**
- * @brief Test variants of GET_RESULT macros and explicit recovery.
- */
 static void test_get_result_variants(void)
 {
     /* Custom handlers */
@@ -655,6 +442,24 @@ static void test_get_result_variants(void)
                            color, COLOR_BLUE)
     assert(fallback_col == COLOR_BLUE);
 
+    /* GET_RESULT_OK_NAMED_OR with const types */
+    GET_RESULT_OK_NAMED_OR(const int, fallback_ci,
+                           SET_RESULT_ERR(const_int, ERR_UNKNOWN, "ci"),
+                           const_int, 42)
+    assert(fallback_ci == 42);
+
+    struct point fallback_cp_init = { .x = 10, .y = 20 };
+    GET_RESULT_OK_NAMED_OR(const struct point, fallback_cp,
+                           SET_RESULT_ERR(const_point, ERR_UNKNOWN, "cp"),
+                           const_point, fallback_cp_init)
+    assert(fallback_cp.x == 10 && fallback_cp.y == 20);
+
+    struct ro_record fallback_ro_init = { .id = 1, .value = 2 };
+    GET_RESULT_OK_NAMED_OR(struct ro_record, fallback_ro,
+                           SET_RESULT_ERR(ro_record, ERR_UNKNOWN, "ro"),
+                           ro_record, fallback_ro_init)
+    assert(fallback_ro.id == 1 && fallback_ro.value == 2);
+
     /* GET_RESULT_ERR statement unwrap test */
     GET_RESULT_ERR(int, unwrap_err_msg, divide(10, 0))
     assert(strcmp(unwrap_err_msg, "Division by zero") == 0);
@@ -664,7 +469,6 @@ static void test_get_result_variants(void)
 
     GET_RESULT_ERR(struct point, unwrap_4arg_err, fail_point(), point)
     assert(strcmp(unwrap_4arg_err, "Point creation failed") == 0);
-
 
     /* Single evaluation of Expr */
     side_effect_calls = 0;
@@ -705,28 +509,10 @@ after_err:
     assert(jumped);
 }
 
-/**
- * @brief Test paths that throw errors and exit processes.
- */
 static void test_throwing_paths(void)
 {
     char buf[512];
     int code;
-
-    /* ASSERT failure paths */
-    code = run_expect_exit(child_assert_fails, buf, sizeof(buf));
-
-    assert(code == ERR_ASSERT_FAILED);
-    assert(strstr(buf, "assert plain message") != NULL);
-
-    code = run_expect_exit(child_assert_fmt_fails, buf, sizeof(buf));
-    assert(code == ERR_ASSERT_FAILED);
-    assert(strstr(buf, "assert fmt message: 42") != NULL);
-
-    code = run_expect_exit(child_throw_plain, buf, sizeof(buf));
-    assert(code == ERR_MEMORY_ERROR);
-    assert(strstr(buf, "plain message") != NULL);
-    assert(strstr(buf, "child_throw_plain") != NULL);
 
     code = run_expect_exit(child_get_result_throws, buf, sizeof(buf));
     assert(code == ERR_RESULT_IS_ERR);
@@ -757,17 +543,12 @@ static void test_throwing_paths(void)
     assert(strstr(buf, "to get err of") != NULL);
 }
 
-/**
- * @brief Main test runner.
- *
- * @return 0 on success.
- */
 int main(void)
 {
     test_define_result_all_types();
     test_get_result_variants();
     test_throwing_paths();
 
-    printf("All better_c tests passed!\n");
+    printf("All result.h tests passed!\n");
     return 0;
 }

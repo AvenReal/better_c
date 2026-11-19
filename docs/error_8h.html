@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-<title>My Project: error.h File Reference</title>
+<title>My Project: src/error.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,6 +98,7 @@ $(function(){initNavTree('error_8h.html','',''); });
 <p>Error codes and fatal error-reporting macros.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;err.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 </div>
 <p><a href="error_8h_source.html">Go to the source code of this file.</a></p>
@@ -108,13 +109,17 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight"><b>__FILE_NAME__</b>&#160;&#160;&#160;__FILE__</td></tr>
 <tr class="memdesc:a1f027784d7427e627ed2c94f0cc65b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fallback basename macro when the compiler does not predefine <span class="tt"><a class="el" href="#a1f027784d7427e627ed2c94f0cc65b2d" title="Fallback basename macro when the compiler does not predefine __FILE_NAME__.">__FILE_NAME__</a></span>. <br /></td></tr>
 <tr class="memitem:a30943075c6960472a7917abb7090e397" id="r_a30943075c6960472a7917abb7090e397"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a30943075c6960472a7917abb7090e397">PRINT_STDERR_FMT</a>(Fmt, ...)</td></tr>
+<tr class="memdesc:a30943075c6960472a7917abb7090e397"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a formatted diagnostic message to <span class="tt">stderr</span> with source location.  <br /></td></tr>
 <tr class="memitem:ae66c6a19355983a1ff0060cd1574f89c" id="r_ae66c6a19355983a1ff0060cd1574f89c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae66c6a19355983a1ff0060cd1574f89c">PRINT_STDERR</a>(Msg)</td></tr>
+<tr class="memdesc:ae66c6a19355983a1ff0060cd1574f89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a plain diagnostic message to <span class="tt">stderr</span> with source location.  <br /></td></tr>
 <tr class="memitem:a11b02b3431c3f669945fea0002d70e2a" id="r_a11b02b3431c3f669945fea0002d70e2a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(Code,  Fmt, ...)</td></tr>
 <tr class="memdesc:a11b02b3431c3f669945fea0002d70e2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminate the process with a <span class="tt">printf</span>-style formatted error message.  <br /></td></tr>
 <tr class="memitem:a9c0b47872efb49f62c1de05d81e53e7c" id="r_a9c0b47872efb49f62c1de05d81e53e7c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(Code,  Msg)</td></tr>
 <tr class="memdesc:a9c0b47872efb49f62c1de05d81e53e7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminate the process with a plain error message string.  <br /></td></tr>
 <tr class="memitem:a13a8f9ab337133e9f625400470ada562" id="r_a13a8f9ab337133e9f625400470ada562"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a>(Cond,  Fmt, ...)</td></tr>
+<tr class="memdesc:a13a8f9ab337133e9f625400470ada562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert that a condition is true, terminating with formatted diagnostics if false.  <br /></td></tr>
 <tr class="memitem:a8b38395544ba1f5273dee43d43ca817b" id="r_a8b38395544ba1f5273dee43d43ca817b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a>(Cond,  Msg)</td></tr>
+<tr class="memdesc:a8b38395544ba1f5273dee43d43ca817b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert that a condition is true, terminating with a message string if false.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -133,7 +138,7 @@ Enumerations</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Error codes and fatal error-reporting macros. </p>
-<p>Provides <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> along with <a class="el" href="#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a> and <a class="el" href="#a11b02b3431c3f669945fea0002d70e2a" title="THROW_ERROR_FMT">THROW_ERROR_FMT</a> for terminating the process with file, function, line, and error-code diagnostics via <span class="tt">errx()</span>. </p>
+<p>Provides <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> along with <a class="el" href="#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a>, <a class="el" href="#a11b02b3431c3f669945fea0002d70e2a" title="THROW_ERROR_FMT">THROW_ERROR_FMT</a>, <a class="el" href="#a8b38395544ba1f5273dee43d43ca817b" title="ASSERT">ASSERT</a>, and <a class="el" href="#a13a8f9ab337133e9f625400470ada562" title="ASSERT_FMT">ASSERT_FMT</a> for terminating the process with file, function, line, and error-code diagnostics. </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a8b38395544ba1f5273dee43d43ca817b" name="a8b38395544ba1f5273dee43d43ca817b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b38395544ba1f5273dee43d43ca817b">&#9670;&#160;</a></span>ASSERT</h2>
@@ -153,8 +158,21 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">ASSERT_FMT(Cond, <span class="stringliteral">&quot;%s&quot;</span>, Msg)</div>
+<b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a>(Cond, <span class="stringliteral">&quot;%s&quot;</span>, Msg)</div>
+<div class="ttc" id="aerror_8h_html_a13a8f9ab337133e9f625400470ada562"><div class="ttname"><a href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a></div><div class="ttdeci">#define ASSERT_FMT(Cond, Fmt,...)</div><div class="ttdoc">Assert that a condition is true, terminating with formatted diagnostics if false.</div><div class="ttdef"><b>Definition</b> error.h:127</div></div>
 </div><!-- fragment -->
+<p>Assert that a condition is true, terminating with a message string if false. </p>
+<p>Shorthand for <span class="tt"><a class="el" href="#a13a8f9ab337133e9f625400470ada562" title="Assert that a condition is true, terminating with formatted diagnostics if false.">ASSERT_FMT</a>(Cond, "s", Msg)</span>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Cond</td><td>Expression evaluating to a boolean condition. </td></tr>
+    <tr><td class="paramname">Msg</td><td>Null-terminated error message string describing the failure.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a class="code hl_define" href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a>(len &gt; 0, <span class="stringliteral">&quot;Length must be strictly positive&quot;</span>);</div>
+<div class="ttc" id="aerror_8h_html_a8b38395544ba1f5273dee43d43ca817b"><div class="ttname"><a href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a></div><div class="ttdeci">#define ASSERT(Cond, Msg)</div><div class="ttdoc">Assert that a condition is true, terminating with a message string if false.</div><div class="ttdef"><b>Definition</b> error.h:148</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a13a8f9ab337133e9f625400470ada562" name="a13a8f9ab337133e9f625400470ada562"></a>
@@ -180,10 +198,27 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!(Cond))                                                               \</div>
-<div class="line">    THROW_ERROR_FMT(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a>, Fmt, __VA_ARGS__);</div>
-<div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a></div><div class="ttdeci">@ ERR_ASSERT_FAILED</div><div class="ttdef"><b>Definition</b> error.h:30</div></div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>                                                                         \</div>
+<div class="line">{                                                                          \</div>
+<div class="line">    if (!(Cond))                                                           \</div>
+<div class="line">    {                                                                      \</div>
+<div class="line">        THROW_ERROR_FMT(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a>, Fmt, __VA_ARGS__);              \</div>
+<div class="line">    }                                                                      \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
+<div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a></div><div class="ttdeci">@ ERR_ASSERT_FAILED</div><div class="ttdef"><b>Definition</b> error.h:31</div></div>
 </div><!-- fragment -->
+<p>Assert that a condition is true, terminating with formatted diagnostics if false. </p>
+<p>If <code class="param">Cond</code> evaluates to false (zero), prints diagnostics to <span class="tt">stderr</span> and terminates the process with <a class="el" href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810" title="ERR_ASSERT_FAILED">ERR_ASSERT_FAILED</a> via <a class="el" href="#a11b02b3431c3f669945fea0002d70e2a" title="THROW_ERROR_FMT">THROW_ERROR_FMT</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Cond</td><td>Expression evaluating to a boolean condition. </td></tr>
+    <tr><td class="paramname">Fmt</td><td><span class="tt">printf</span>-style format string literal describing the assertion failure. </td></tr>
+    <tr><td class="paramname">...</td><td>Arguments corresponding to format specifiers in <code class="param">Fmt</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a class="code hl_define" href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a>(ptr != NULL, <span class="stringliteral">&quot;Pointer %s was NULL&quot;</span>, <span class="stringliteral">&quot;ptr&quot;</span>);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="ae66c6a19355983a1ff0060cd1574f89c" name="ae66c6a19355983a1ff0060cd1574f89c"></a>
@@ -200,8 +235,20 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">PRINT_STDERR_FMT(<span class="stringliteral">&quot;%s&quot;</span>, Msg)</div>
+<b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a30943075c6960472a7917abb7090e397">PRINT_STDERR_FMT</a>(<span class="stringliteral">&quot;%s&quot;</span>, Msg)</div>
+<div class="ttc" id="aerror_8h_html_a30943075c6960472a7917abb7090e397"><div class="ttname"><a href="#a30943075c6960472a7917abb7090e397">PRINT_STDERR_FMT</a></div><div class="ttdeci">#define PRINT_STDERR_FMT(Fmt,...)</div><div class="ttdoc">Print a formatted diagnostic message to stderr with source location.</div><div class="ttdef"><b>Definition</b> error.h:52</div></div>
 </div><!-- fragment -->
+<p>Print a plain diagnostic message to <span class="tt">stderr</span> with source location. </p>
+<p>Expands to <span class="tt"><a class="el" href="#a30943075c6960472a7917abb7090e397" title="Print a formatted diagnostic message to stderr with source location.">PRINT_STDERR_FMT</a>("s", Msg)</span> to print messages safely without format string interpretation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Msg</td><td>Null-terminated message string to print.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a class="code hl_define" href="#ae66c6a19355983a1ff0060cd1574f89c">PRINT_STDERR</a>(<span class="stringliteral">&quot;Something went wrong\n&quot;</span>);</div>
+<div class="ttc" id="aerror_8h_html_ae66c6a19355983a1ff0060cd1574f89c"><div class="ttname"><a href="#ae66c6a19355983a1ff0060cd1574f89c">PRINT_STDERR</a></div><div class="ttdeci">#define PRINT_STDERR(Msg)</div><div class="ttdoc">Print a plain diagnostic message to stderr with source location.</div><div class="ttdef"><b>Definition</b> error.h:68</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a30943075c6960472a7917abb7090e397" name="a30943075c6960472a7917abb7090e397"></a>
@@ -224,8 +271,19 @@ Enumerations</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">fprintf(stderr, <span class="stringliteral">&quot;Error message from `%s` -&gt; %s:%d : &quot;</span> Fmt, <a class="code hl_define" href="#a1f027784d7427e627ed2c94f0cc65b2d">__FILE_NAME__</a>,  \</div>
 <div class="line">        __func__, __LINE__, __VA_ARGS__)</div>
-<div class="ttc" id="aerror_8h_html_a1f027784d7427e627ed2c94f0cc65b2d"><div class="ttname"><a href="#a1f027784d7427e627ed2c94f0cc65b2d">__FILE_NAME__</a></div><div class="ttdeci">#define __FILE_NAME__</div><div class="ttdoc">Fallback basename macro when the compiler does not predefine __FILE_NAME__.</div><div class="ttdef"><b>Definition</b> error.h:21</div></div>
+<div class="ttc" id="aerror_8h_html_a1f027784d7427e627ed2c94f0cc65b2d"><div class="ttname"><a href="#a1f027784d7427e627ed2c94f0cc65b2d">__FILE_NAME__</a></div><div class="ttdeci">#define __FILE_NAME__</div><div class="ttdoc">Fallback basename macro when the compiler does not predefine __FILE_NAME__.</div><div class="ttdef"><b>Definition</b> error.h:22</div></div>
 </div><!-- fragment -->
+<p>Print a formatted diagnostic message to <span class="tt">stderr</span> with source location. </p>
+<p>Prints source file name (<span class="tt"><a class="el" href="#a1f027784d7427e627ed2c94f0cc65b2d" title="Fallback basename macro when the compiler does not predefine __FILE_NAME__.">__FILE_NAME__</a></span>), function name (<span class="tt">__func__</span>), line number (<span class="tt">__LINE__</span>), and the formatted message to <span class="tt">stderr</span>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Fmt</td><td>printf-style format string. </td></tr>
+    <tr><td class="paramname">...</td><td>Format arguments matching <code class="param">Fmt</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a class="code hl_define" href="#a30943075c6960472a7917abb7090e397">PRINT_STDERR_FMT</a>(<span class="stringliteral">&quot;Invalid value: %d\n&quot;</span>, val);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a9c0b47872efb49f62c1de05d81e53e7c" name="a9c0b47872efb49f62c1de05d81e53e7c"></a>
@@ -247,22 +305,22 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(Code, <span class="stringliteral">&quot;%s&quot;</span>, Msg)</div>
-<div class="ttc" id="aerror_8h_html_a11b02b3431c3f669945fea0002d70e2a"><div class="ttname"><a href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a></div><div class="ttdeci">#define THROW_ERROR_FMT(Code, Fmt,...)</div><div class="ttdoc">Terminate the process with a printf-style formatted error message.</div><div class="ttdef"><b>Definition</b> error.h:64</div></div>
+<div class="ttc" id="aerror_8h_html_a11b02b3431c3f669945fea0002d70e2a"><div class="ttname"><a href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a></div><div class="ttdeci">#define THROW_ERROR_FMT(Code, Fmt,...)</div><div class="ttdoc">Terminate the process with a printf-style formatted error message.</div><div class="ttdef"><b>Definition</b> error.h:88</div></div>
 </div><!-- fragment -->
 <p>Terminate the process with a plain error message string. </p>
-<p>Expands to <span class="tt"><a class="el" href="#a11b02b3431c3f669945fea0002d70e2a" title="Terminate the process with a printf-style formatted error message.">THROW_ERROR_FMT</a>(Code, "s", Msg)</span> so runtime strings (such as <span class="tt">res.err</span>) are printed safely without format-string interpretation.</p>
+<p>Expands to <span class="tt"><a class="el" href="#a11b02b3431c3f669945fea0002d70e2a" title="Terminate the process with a printf-style formatted error message.">THROW_ERROR_FMT</a>(Code, "s", Msg)</span> so runtime strings are printed safely without format-string interpretation.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Code</td><td>Exit status / <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. Evaluated twice; avoid expressions with side effects. </td></tr>
+    <tr><td class="paramname">Code</td><td>Exit status or <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. </td></tr>
     <tr><td class="paramname">Msg</td><td>Null-terminated error message string (<span class="tt">const char *</span>).</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Callers must include <span class="tt">&lt;err.h&gt;</span> for <span class="tt">errx()</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1">ERR_MEMORY_ERROR</a>, <span class="stringliteral">&quot;Out of memory&quot;</span>);</div>
-<div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(res.status, res.err);</div>
-<div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1">ERR_MEMORY_ERROR</a></div><div class="ttdeci">@ ERR_MEMORY_ERROR</div><div class="ttdef"><b>Definition</b> error.h:31</div></div>
-<div class="ttc" id="aerror_8h_html_a9c0b47872efb49f62c1de05d81e53e7c"><div class="ttname"><a href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a></div><div class="ttdeci">#define THROW_ERROR(Code, Msg)</div><div class="ttdoc">Terminate the process with a plain error message string.</div><div class="ttdef"><b>Definition</b> error.h:86</div></div>
+<div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(res.status, <a class="code hl_define" href="result_8h.html#a66a4baeee742b1b48c4467dffa46c9f5">GET_RESULT_ERR</a>(res));</div>
+<div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1">ERR_MEMORY_ERROR</a></div><div class="ttdeci">@ ERR_MEMORY_ERROR</div><div class="ttdef"><b>Definition</b> error.h:32</div></div>
+<div class="ttc" id="aerror_8h_html_a9c0b47872efb49f62c1de05d81e53e7c"><div class="ttname"><a href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a></div><div class="ttdeci">#define THROW_ERROR(Code, Msg)</div><div class="ttdoc">Terminate the process with a plain error message string.</div><div class="ttdef"><b>Definition</b> error.h:111</div></div>
+<div class="ttc" id="aresult_8h_html_a66a4baeee742b1b48c4467dffa46c9f5"><div class="ttname"><a href="result_8h.html#a66a4baeee742b1b48c4467dffa46c9f5">GET_RESULT_ERR</a></div><div class="ttdeci">#define GET_RESULT_ERR(...)</div><div class="ttdoc">Retrieve or unwrap the error message from a Result.</div><div class="ttdef"><b>Definition</b> result.h:248</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -289,26 +347,28 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">PRINT_STDERR_FMT(<span class="stringliteral">&quot;Exited with error code %d:\n\t&quot;</span> Fmt, (Code),             \</div>
-<div class="line">                 __VA_ARGS__);                                             \</div>
-<div class="line">exit(Code)</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>                                                                         \</div>
+<div class="line">{                                                                          \</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">int</span> _better_c_code = (Code);                                     \</div>
+<div class="line">    PRINT_STDERR_FMT(<span class="stringliteral">&quot;Exited with error code %d:\n\t&quot;</span> Fmt <span class="stringliteral">&quot;\n&quot;</span>,            \</div>
+<div class="line">                     _better_c_code, __VA_ARGS__);                         \</div>
+<div class="line">    exit(_better_c_code);                                                 \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
 <p>Terminate the process with a <span class="tt">printf</span>-style formatted error message. </p>
-<p>Prints the source file name, function name, line number, error code, and formatted message to <span class="tt">stderr</span>, then exits with <code class="param">Code</code> via <span class="tt">errx()</span>.</p>
+<p>Prints the source file name, function name, line number, exit code, and formatted message to <span class="tt">stderr</span>, then terminates the process with <code class="param">Code</code> via <span class="tt">exit()</span>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Code</td><td>Exit status / <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. Evaluated twice; avoid expressions with side effects. </td></tr>
+    <tr><td class="paramname">Code</td><td>Exit status or <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. </td></tr>
     <tr><td class="paramname">Fmt</td><td><span class="tt">printf</span>-style format string literal. </td></tr>
     <tr><td class="paramname">...</td><td>One or more arguments corresponding to format specifiers in <code class="param">Fmt</code>.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Callers must include <span class="tt">&lt;err.h&gt;</span> for <span class="tt">errx()</span>. </dd>
-<dd>
-For plain messages without format arguments, use <a class="el" href="#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>For plain messages without format arguments, use <a class="el" href="#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a>, <span class="stringliteral">&quot;Invalid index: %zu&quot;</span>, idx);</div>
-<div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(res.status, <span class="stringliteral">&quot;Operation failed: %s&quot;</span>, res.err);</div>
-<div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a></div><div class="ttdeci">@ ERR_INVALID_ARGUMENT</div><div class="ttdef"><b>Definition</b> error.h:32</div></div>
+<div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(res.status, <span class="stringliteral">&quot;Operation failed: %s&quot;</span>, <a class="code hl_define" href="result_8h.html#a66a4baeee742b1b48c4467dffa46c9f5">GET_RESULT_ERR</a>(res));</div>
+<div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a></div><div class="ttdeci">@ ERR_INVALID_ARGUMENT</div><div class="ttdef"><b>Definition</b> error.h:33</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -359,7 +419,7 @@ For plain messages without format arguments, use <a class="el" href="#a9c0b47872
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="error_8h.html">error.h</a></li>
+    <li class="navelem"><b>src</b></li><li class="navelem"><a href="error_8h.html">error.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

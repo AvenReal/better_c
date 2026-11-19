@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['color_0',['color',['../macros_8c.html#a37dbdc30935031c05304482e1be89d8f',1,'color:&#160;macros.c'],['../test__better__c_8c.html#a37dbdc30935031c05304482e1be89d8f',1,'color:&#160;test_better_c.c']]]
+  ['error_5fcode_0',['error_code',['../error_8h.html#a88a76ee847c844cc47b94caac600689d',1,'error.h']]]
 ];

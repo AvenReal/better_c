@@ -1,24 +1,29 @@
 CC ?= gcc
-CFLAGS ?= -std=c11 -Wall -Wextra -Werror -Wpedantic -Wshadow
+CFLAGS ?= -std=c11 -Wall -Wextra -Werror -Wpedantic -Wshadow -Isrc
 
-HEADERS = error.h result.h better_c.h
+HEADERS = src/error.h src/result.h
+TESTS = test_error test_result
 
-.PHONY: all test clean
+.PHONY: all test clean docs
 
-all: macros
+all: macros $(TESTS)
 
 macros: macros.c $(HEADERS)
 	$(CC) $(CFLAGS) macros.c -o macros
 
-test_better_c: test_better_c.c $(HEADERS)
-	$(CC) $(CFLAGS) test_better_c.c -o test_better_c
+test_error: tests/test_error.c src/error.h
+	$(CC) $(CFLAGS) tests/test_error.c -o test_error
 
-test: test_better_c macros
-	./test_better_c
+test_result: tests/test_result.c $(HEADERS)
+	$(CC) $(CFLAGS) tests/test_result.c -o test_result
+
+test: $(TESTS) macros
+	./test_error
+	./test_result
 	./macros
 
 docs:
 	doxygen Doxyfile
 
 clean:
-	rm -f macros test_better_c
+	rm -f macros $(TESTS)

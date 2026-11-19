@@ -1,6 +1,10 @@
 var error_8h =
 [
     [ "__FILE_NAME__", "error_8h.html#a1f027784d7427e627ed2c94f0cc65b2d", null ],
+    [ "ASSERT", "error_8h.html#a8b38395544ba1f5273dee43d43ca817b", null ],
+    [ "ASSERT_FMT", "error_8h.html#a13a8f9ab337133e9f625400470ada562", null ],
+    [ "PRINT_STDERR", "error_8h.html#ae66c6a19355983a1ff0060cd1574f89c", null ],
+    [ "PRINT_STDERR_FMT", "error_8h.html#a30943075c6960472a7917abb7090e397", null ],
     [ "THROW_ERROR", "error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c", null ],
     [ "THROW_ERROR_FMT", "error_8h.html#a11b02b3431c3f669945fea0002d70e2a", null ],
     [ "error_code", "error_8h.html#a88a76ee847c844cc47b94caac600689d", [

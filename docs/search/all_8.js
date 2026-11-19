@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['h_20macros_0',['&lt;span class=&quot;tt&quot;&gt;result.h&lt;/span&gt; Macros',['../md_README.html#autotoc_md10',1,'']]],
-  ['h_20macros_20types_1',['&lt;span class=&quot;tt&quot;&gt;error.h&lt;/span&gt; Macros &amp;amp; Types',['../md_README.html#autotoc_md3',1,'']]],
-  ['headers_2',['Headers',['../md_README.html#autotoc_md1',1,'']]],
-  ['height_3',['height',['../structnested__box.html#a1ab6f97dc2359f7cadb87fe8f65ed984',1,'nested_box']]]
+  ['throw_5ferror_0',['THROW_ERROR',['../error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c',1,'error.h']]],
+  ['throw_5ferror_5ffmt_1',['THROW_ERROR_FMT',['../error_8h.html#a11b02b3431c3f669945fea0002d70e2a',1,'error.h']]]
 ];

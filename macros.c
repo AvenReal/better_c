@@ -10,62 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "better_c.h"
-
-#ifndef GET_RESULT_ERR
-/** @cond INTERNAL */
-#    define _GET_RESULT_ERR_1(Res) ((Res).value.err)
-#    define _GET_RESULT_ERR_3(Type, Var, Expr)                                 \
-        RESULT(Type) Var##_result = (Expr);                                    \
-        if (RESULT_IS_OK(Var##_result))                                        \
-        {                                                                      \
-            THROW_ERROR(ERR_RESULT_IS_OK,                                      \
-                        "Tried to get err of " #Expr " but it's an ok.");      \
-        }                                                                      \
-        const char *Var = Var##_result.value.err;
-#    define _GET_RESULT_ERR_4(Type, Var, Expr, Name)                           \
-        RESULT(Name) Var##_result = (Expr);                                    \
-        if (RESULT_IS_OK(Var##_result))                                        \
-        {                                                                      \
-            THROW_ERROR(ERR_RESULT_IS_OK,                                      \
-                        "Tried to get err of " #Expr " but it's an ok.");      \
-        }                                                                      \
-        const char *Var = Var##_result.value.err;
-#    define _GET_RESULT_ERR_CHOOSER(_1, _2, _3, _4, NAME, ...) NAME
-/** @endcond */
-
-/**
- * @brief Retrieve or unwrap the error message from a Result.
- *
- * When passed a single argument `GET_RESULT_ERR(Res)`, retrieves the `const char *`
- * error string from the result variable without accessing the union member directly.
- * When passed three arguments `GET_RESULT_ERR(Type, Var, Expr)` or four arguments
- * `GET_RESULT_ERR(Type, Var, Expr, Name)`, evaluates `Expr` and unwraps the error
- * message into `const char *Var`, throwing `ERR_RESULT_IS_OK` if `Expr` was successful.
- *
- * @param ... Variable arguments: either `(Res)` for 1-arg inspection, or `(Type, Var, Expr)`
- *            / `(Type, Var, Expr, Name)` for statement unwrapping.
- */
-#    define GET_RESULT_ERR(...)                                                \
-        _GET_RESULT_ERR_CHOOSER(__VA_ARGS__, _GET_RESULT_ERR_4,                \
-                                _GET_RESULT_ERR_3, _unused,                    \
-                                _GET_RESULT_ERR_1, 0)(__VA_ARGS__)
-#endif
-
-#undef GET_RESULT_ERR_NAMED
-/**
- * @brief Unwrap a named Result's error message into @p Var.
- *
- * Evaluates @p Expr and assigns its error string to `const char *Var`.
- * If @p Expr evaluated to an OK Result, terminates via THROW_ERROR with `ERR_RESULT_IS_OK`.
- *
- * @param Type Single-word or named Result type of the ok payload.
- * @param Var  Variable name to declare for the error string (`const char *Var`).
- * @param Expr Expression evaluating to `RESULT(Name)`.
- * @param Name Result type name suffix.
- */
-#define GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)                            \
-    _GET_RESULT_ERR_4(Type, Var, Expr, Name)
+#include "error.h"
+#include "result.h"
 
 
 /**

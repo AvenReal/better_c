@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['better_5fc_20macros_20guide_0',['better_c Macros Guide',['../md_README.html',1,'']]],
-  ['better_5fc_2eh_1',['better_c.h',['../better__c_8h.html',1,'']]]
+  ['define_5fresult_0',['DEFINE_RESULT',['../result_8h.html#a5edb4a6d0a53ae670598bb4ddf672492',1,'result.h']]],
+  ['define_5fresult_5fnamed_1',['DEFINE_RESULT_NAMED',['../result_8h.html#a4ba5b56b5746cc919cb9b04ef7facb36',1,'result.h']]],
+  ['define_5fresult_5funion_2',['DEFINE_RESULT_UNION',['../result_8h.html#a66d0838d7411335c16054e95d8acdd72',1,'result.h']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['define_5fresult_0',['DEFINE_RESULT',['../result_8h.html#a5edb4a6d0a53ae670598bb4ddf672492',1,'result.h']]],
-  ['define_5fresult_5fnamed_1',['DEFINE_RESULT_NAMED',['../result_8h.html#a4ba5b56b5746cc919cb9b04ef7facb36',1,'result.h']]]
+  ['assert_0',['ASSERT',['../error_8h.html#a8b38395544ba1f5273dee43d43ca817b',1,'error.h']]],
+  ['assert_5ffmt_1',['ASSERT_FMT',['../error_8h.html#a13a8f9ab337133e9f625400470ada562',1,'error.h']]]
 ];

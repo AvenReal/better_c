@@ -2,6 +2,9 @@ var result_8h =
 [
     [ "DEFINE_RESULT", "result_8h.html#a5edb4a6d0a53ae670598bb4ddf672492", null ],
     [ "DEFINE_RESULT_NAMED", "result_8h.html#a4ba5b56b5746cc919cb9b04ef7facb36", null ],
+    [ "DEFINE_RESULT_UNION", "result_8h.html#a66d0838d7411335c16054e95d8acdd72", null ],
+    [ "GET_RESULT_ERR", "result_8h.html#a66a4baeee742b1b48c4467dffa46c9f5", null ],
+    [ "GET_RESULT_ERR_NAMED", "result_8h.html#ab7f533f55f59ec563cc35030f80c5d5f", null ],
     [ "GET_RESULT_OK", "result_8h.html#a22b33937b3fd5a192242bfddd5e2d07b", null ],
     [ "GET_RESULT_OK_NAMED", "result_8h.html#ac8597705fb7f9bed69082cb846882738", null ],
     [ "GET_RESULT_OK_NAMED_OR", "result_8h.html#abc01580a267ef93ef1b3588f7e41473b", null ],
@@ -11,6 +14,7 @@ var result_8h =
     [ "RESULT", "result_8h.html#a332a7ebbfd39292d87fad7d9e0a84654", null ],
     [ "RESULT_IS_ERR", "result_8h.html#a3891971c286544996926c2919a9110d5", null ],
     [ "RESULT_IS_OK", "result_8h.html#a4bfce36ca3f23b7e7ec32f11ed89bef1", null ],
+    [ "RESULT_UNION", "result_8h.html#a112a3079fafbd174f823feed0dc8f97d", null ],
     [ "SET_RESULT_ERR", "result_8h.html#a1e1a2442563f3c6199a3b10c94d29dac", null ],
     [ "SET_RESULT_OK", "result_8h.html#a826c837785d81d9572c4c9fe6df0c26d", null ]
 ];

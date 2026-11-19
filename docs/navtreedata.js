@@ -25,50 +25,10 @@
 var NAVTREE =
 [
   [ "My Project", "index.html", [
-    [ "better_c Macros Guide", "md_README.html", [
-      [ "Headers", "md_README.html#autotoc_md1", null ],
-      [ "<span class=\"tt\">error.h</span> Macros &amp; Types", "md_README.html#autotoc_md3", [
-        [ "<span class=\"tt\">__FILE_NAME__</span>", "md_README.html#autotoc_md4", null ],
-        [ "<span class=\"tt\">enum error_code</span>", "md_README.html#autotoc_md5", null ],
-        [ "<span class=\"tt\">THROW_ERROR(Code, Msg)</span>", "md_README.html#autotoc_md6", null ],
-        [ "<span class=\"tt\">THROW_ERROR_FMT(Code, Fmt, ...)</span>", "md_README.html#autotoc_md7", null ],
-        [ "<span class=\"tt\">ASSERT(Cond, Msg)</span> and <span class=\"tt\">ASSERT_FMT(Cond, Fmt, ...)</span>", "md_README.html#autotoc_md8", null ]
-      ] ],
-      [ "<span class=\"tt\">result.h</span> Macros", "md_README.html#autotoc_md10", [
-        [ "Result Struct Architecture", "md_README.html#autotoc_md11", null ],
-        [ "Defining Result Types", "md_README.html#autotoc_md12", [
-          [ "<span class=\"tt\">RESULT_UNION(Name)</span> and <span class=\"tt\">DEFINE_RESULT_UNION(Name, Type)</span>", "md_README.html#autotoc_md13", null ],
-          [ "<span class=\"tt\">DEFINE_RESULT(Type)</span>", "md_README.html#autotoc_md14", null ],
-          [ "<span class=\"tt\">DEFINE_RESULT_NAMED(Type, Name)</span>", "md_README.html#autotoc_md15", null ]
-        ] ],
-        [ "Result Type Name, Constructors &amp; Predicates", "md_README.html#autotoc_md17", [
-          [ "<span class=\"tt\">RESULT(Name)</span>", "md_README.html#autotoc_md18", null ],
-          [ "<span class=\"tt\">SET_RESULT_OK(Name, Value)</span>", "md_README.html#autotoc_md19", null ],
-          [ "<span class=\"tt\">SET_RESULT_ERR(Name, Code, Message)</span>", "md_README.html#autotoc_md20", null ],
-          [ "<span class=\"tt\">RESULT_IS_OK(...)</span> and <span class=\"tt\">RESULT_IS_ERR(...)</span>", "md_README.html#autotoc_md21", null ]
-        ] ],
-        [ "Unwrapping Results", "md_README.html#autotoc_md23", [
-          [ "<span class=\"tt\">GET_RESULT_OK(Type, Var, Expr)</span> and <span class=\"tt\">GET_RESULT_OK_NAMED(Type, Var, Expr, Name)</span>", "md_README.html#autotoc_md24", null ],
-          [ "<span class=\"tt\">GET_RESULT_ERR(...)</span> and <span class=\"tt\">GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)</span>", "md_README.html#autotoc_md25", null ],
-          [ "<span class=\"tt\">GET_RESULT_OK_OR(Type, Var, Expr, ...)</span> and <span class=\"tt\">GET_RESULT_OK_NAMED_OR(Type, Var, Expr, Name, ...)</span>", "md_README.html#autotoc_md26", null ],
-          [ "<span class=\"tt\">GET_RESULT_OK_OR_ELSE(Type, Var, Expr, ...)</span> and <span class=\"tt\">GET_RESULT_OK_NAMED_OR_ELSE(Type, Var, Expr, Name, ...)</span>", "md_README.html#autotoc_md27", null ]
-        ] ]
-      ] ],
-      [ "Complete Example", "md_README.html#autotoc_md29", null ]
-    ] ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ]
-      ] ]
-    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
@@ -79,7 +39,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"dir_68267d1309a1af8e8297ef4c3efbcdba.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

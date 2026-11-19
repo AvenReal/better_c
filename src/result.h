@@ -28,8 +28,35 @@
  * @endcode
  */
 #define RESULT(Name) struct Name##_result
+
+/**
+ * @brief Expand to the Result payload union type name associated with @p Name.
+ *
+ * Expands to `union <Name>_result_union`, defined with
+ * @ref DEFINE_RESULT_UNION, @ref DEFINE_RESULT, or @ref DEFINE_RESULT_NAMED.
+ *
+ * @param Name Identifier suffix of the defined Result type.
+ *
+ * @code{.c}
+ * RESULT_UNION(int) u;
+ * @endcode
+ */
 #define RESULT_UNION(Name) union Name##_result_union
 
+/**
+ * @brief Define the payload union type for a Result holding @p Type or an error message.
+ *
+ * Generates `union <Name>_result_union` with members:
+ * - `Type ok`: Payload value on success.
+ * - `const char *err`: Error message string on failure.
+ *
+ * @param Name Identifier suffix of the Result type.
+ * @param Type C object type stored in the `.ok` member.
+ *
+ * @code{.c}
+ * DEFINE_RESULT_UNION(int, int)
+ * @endcode
+ */
 #define DEFINE_RESULT_UNION(Name, Type)                                        \
     RESULT_UNION(Name)                                                         \
     {                                                                          \
@@ -41,11 +68,11 @@
  * @brief Define a Result struct and inline constructors under an explicit name.
  *
  * Generates:
- * - `struct <Name>_result` with `enum error_code status` and an anonymous
- *   `union { Type ok; const char *err; }`
+ * - `union <Name>_result_union` with `Type ok` and `const char *err` via @ref DEFINE_RESULT_UNION
+ * - `struct <Name>_result` with `enum error_code status` and `RESULT_UNION(Name) value`
  * - `static inline RESULT(Name) <Name>_result_ok(Type value)`
- * - `static inline RESULT(Name) <Name>_result_err(enum error_code code, const
- * char *error_msg)` (coercing `ERR_NO_ERROR` to `ERR_UNKNOWN`)
+ * - `static inline RESULT(Name) <Name>_result_err(enum error_code code, const char *error_msg)`
+ *   (coercing `ERR_NO_ERROR` to `ERR_UNKNOWN`)
  *
  * Use this macro for multi-word types, enums, structs, unions, pointers,
  * struct pointers, pointer-to-pointers, and `const`-qualified types.
@@ -111,7 +138,7 @@
  *
  * @param Name  Result type name passed to @ref DEFINE_RESULT or
  *              @ref DEFINE_RESULT_NAMED.
- * @param Value Success value to store in `.ok`. For compound literals
+ * @param Value Success value to store in `.value.ok`. For compound literals
  *              containing commas, use a local variable or wrap the literal in
  *              extra parentheses, e.g. `((struct point){ .x = 1, .y = 2 })`.
  * @return A `RESULT(Name)` value with `.status == ERR_NO_ERROR`.
@@ -168,26 +195,73 @@
  */
 #define RESULT_IS_ERR(...) ((__VA_ARGS__).status != ERR_NO_ERROR)
 
+/**
+ * @brief Unwrap a named Result's error message into @p Var.
+ *
+ * Statement macro that evaluates @p Expr into `RESULT(Name) <Var>_result`.
+ * If `<Var>_result` is an OK Result, terminates the process via @ref THROW_ERROR
+ * with `ERR_RESULT_IS_OK`. Otherwise, declares `char *Var = <Var>_result.value.err;`.
+ *
+ * @param Type C object type of the Result's `.ok` payload.
+ * @param Var  Name of the variable to declare for the unwrapped error message.
+ * @param Expr Expression yielding a `RESULT(Name)`.
+ * @param Name Result type name suffix passed to @ref DEFINE_RESULT_NAMED.
+ *
+ * @warning Expands to multiple statements; enclose in `{ ... }` inside
+ *          unbraced `if`/`else`/`for`/`while` bodies, and omit a trailing `;`.
+ *
+ * @code{.c}
+ * GET_RESULT_ERR_NAMED(struct point, err_msg, make_point_err(), point)
+ * printf("Error: %s\n", err_msg);
+ * @endcode
+ */
 #define GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)                            \
-    RESULT(Name) Var##_result = Expr;                                          \
-    if (RESULT_IS_OK(Var))                                                     \
+    RESULT(Name) Var##_result = (Expr);                                        \
+    if (RESULT_IS_OK(Var##_result))                                            \
     {                                                                          \
         THROW_ERROR(ERR_RESULT_IS_OK,                                          \
-                    "Tryied to get err of " #Expr " but it's an ok.");         \
+                    "Tried to get err of " #Expr " but it's an ok.");          \
     }                                                                          \
-    char *Var = Var##_result.value.err;
+    const char *Var = Var##_result.value.err;
+
+/** @cond INTERNAL */
+#define _GET_RESULT_ERR_1(Res) ((Res).value.err)
+#define _GET_RESULT_ERR_3(Type, Var, Expr)                                     \
+    GET_RESULT_ERR_NAMED(Type, Var, Expr, Type)
+#define _GET_RESULT_ERR_4(Type, Var, Expr, Name)                               \
+    GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)
+#define _GET_RESULT_ERR_CHOOSER(_1, _2, _3, _4, NAME, ...) NAME
+/** @endcond */
+
+/**
+ * @brief Retrieve or unwrap the error message from a Result.
+ *
+ * When passed a single argument `GET_RESULT_ERR(Res)`, retrieves the `const char *`
+ * error string from the result variable without accessing the union member directly.
+ * When passed three arguments `GET_RESULT_ERR(Type, Var, Expr)` or four arguments
+ * `GET_RESULT_ERR(Type, Var, Expr, Name)`, evaluates `Expr` and unwraps the error
+ * message into `const char *Var`, throwing `ERR_RESULT_IS_OK` if `Expr` was successful.
+ *
+ * @param ... Variable arguments: either `(Res)` for 1-arg inspection, or `(Type, Var, Expr)`
+ *            / `(Type, Var, Expr, Name)` for statement unwrapping.
+ */
+#define GET_RESULT_ERR(...)                                                    \
+    _GET_RESULT_ERR_CHOOSER(__VA_ARGS__, _GET_RESULT_ERR_4,                    \
+                            _GET_RESULT_ERR_3, _unused,                        \
+                            _GET_RESULT_ERR_1, 0)(__VA_ARGS__)
+
 /**
  * @brief Unwrap a named Result into @p Var, running a custom handler on error.
  *
  * Statement macro that evaluates @p Expr once into `RESULT(Name) <Var>_result`,
  * executes `...` if `<Var>_result` is an error, asserts that `<Var>_result` is
  * no longer an error (terminating via @ref THROW_ERROR with
- * `ERR_RESULT_IS_ERR` otherwise), and declares `Type Var = <Var>_result.ok;`.
+ * `ERR_RESULT_IS_ERR` otherwise), and declares `Type Var = <Var>_result.value.ok;`.
  *
- * Inside the error handler, `<Var>_result.status` and `<Var>_result.err` are
+ * Inside the error handler, `<Var>_result.status` and `<Var>_result.value.err` are
  * available. The handler must either transfer control (`return`, `break`,
  * `continue`, `goto`, @ref THROW_ERROR, @ref THROW_ERROR_FMT) or recover by
- * setting `<Var>_result.status = ERR_NO_ERROR` and `<Var>_result.ok = ...`.
+ * setting `<Var>_result.status = ERR_NO_ERROR` and `<Var>_result.value.ok = ...`.
  *
  * @param Type C type of the unwrapped variable @p Var.
  * @param Var  Name of the variable to declare for the unwrapped value.
@@ -200,7 +274,8 @@
  *
  * @code{.c}
  * GET_RESULT_OK_NAMED_OR_ELSE(struct point *, p, alloc_point(1, 2), point_ptr,
- * { fprintf(stderr, "Error (%d): %s\n", (int)p_result.status, p_result.err);
+ * {
+ *     fprintf(stderr, "Error (%d): %s\n", (int)p_result.status, p_result.value.err);
  *     return 1;
  * })
  * @endcode
@@ -235,7 +310,7 @@
  *
  * @code{.c}
  * GET_RESULT_OK_OR_ELSE(int, q, divide(10, 0), {
- *     THROW_ERROR_FMT(q_result.status, "divide failed: %s", q_result.err);
+ *     THROW_ERROR_FMT(q_result.status, "divide failed: %s", q_result.value.err);
  * })
  * @endcode
  */
@@ -247,7 +322,7 @@
  *        error.
  *
  * Statement macro that evaluates @p Expr once into `RESULT(Name) <Var>_result`
- * and initializes `Type Var` with `<Var>_result.ok` on success or the lazily
+ * and initializes `Type Var` with `<Var>_result.value.ok` on success or the lazily
  * evaluated fallback expression `...` on error.
  *
  * @param Type C type of the unwrapped variable @p Var.
@@ -265,9 +340,9 @@
  * @endcode
  */
 #define GET_RESULT_OK_NAMED_OR(Type, Var, Expr, Name, ...)                     \
-    GET_RESULT_OK_NAMED_OR_ELSE(Type, Var, Expr, Name,                         \
-                                Var##_result.status = ERR_NO_ERROR;            \
-                                Var##_result.value.ok = (__VA_ARGS__);)
+    RESULT(Name) Var##_result = (Expr);                                        \
+    Type Var = RESULT_IS_OK(Var##_result) ? Var##_result.value.ok             \
+                                          : (__VA_ARGS__);
 /**
  * @brief Unwrap a single-word Result into @p Var, or use a fallback expression
  *        on error.
@@ -310,7 +385,7 @@
     GET_RESULT_OK_NAMED_OR_ELSE(                                               \
         Type, Var, Expr, Name,                                                 \
         THROW_ERROR(ERR_RESULT_IS_ERR,                                         \
-                    "Tryied to get result value but " #Expr                    \
+                    "Tried to get result value but " #Expr                     \
                     " returned an error.");)
 
 /**
