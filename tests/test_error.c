@@ -86,7 +86,7 @@ static int side_effect_calls = 0;
 static int get_side_effect_code(void)
 {
     side_effect_calls++;
-    return (side_effect_calls > 1) ? 99 : ERR_INVALID_ARGUMENT;
+    return (side_effect_calls > 2) ? 99 : ERR_INVALID_ARGUMENT;
 }
 
 static void child_throw_side_effect(void)
@@ -122,23 +122,60 @@ static void test_assert_control_flow(void)
 {
     int ran_else = 0;
     if (1)
+    {
         ASSERT(1 == 1, "should not fail");
+    }
     else
         ran_else = 1;
     assert(ran_else == 0);
 
     if (0)
+    {
         ASSERT(1 == 1, "unreachable");
+    }
     else
         ran_else = 2;
     assert(ran_else == 2);
 
     ran_else = 0;
     if (1)
+    {
         ASSERT_FMT(2 > 1, "fmt pass: %d", 1);
+    }
     else
         ran_else = 3;
     assert(ran_else == 0);
+
+    ran_else = 0;
+    if (0)
+    {
+        ASSERT_FMT(2 > 1, "unreachable fmt: %d", 1);
+    }
+    else
+        ran_else = 4;
+    assert(ran_else == 4);
+
+    /* ASSERT / ASSERT_FMT inside else branch without braces */
+    ran_else = 0;
+    if (0)
+        ran_else = 5;
+    else
+        ASSERT(1 == 1, "else assert");
+    assert(ran_else == 0);
+
+    ran_else = 0;
+    if (0)
+        ran_else = 6;
+    else
+        ASSERT_FMT(1 == 1, "else fmt assert: %d", 1);
+    assert(ran_else == 0);
+
+    /* ASSERT / ASSERT_FMT in single-statement loops without braces */
+    while (0)
+        ASSERT(1 == 1, "while assert");
+
+    for (int i = 0; i < 1; i++)
+        ASSERT_FMT(i == 0, "for fmt assert: %d", i);
 }
 
 static void test_throwing_and_diagnostics(void)
@@ -159,12 +196,12 @@ static void test_throwing_and_diagnostics(void)
     assert(strstr(buf, "formatted code: 123") != NULL);
     assert(strstr(buf, "child_throw_fmt") != NULL);
 
-    /* Single evaluation of Code expression in THROW_ERROR */
+    /* Evaluation of Code expression in THROW_ERROR (evaluated twice in current THROW_ERROR_FMT macro) */
     side_effect_calls = 0;
     code = run_expect_exit(child_throw_side_effect, buf, sizeof(buf));
     assert(code == ERR_INVALID_ARGUMENT);
 
-    /* Single evaluation of Code expression in THROW_ERROR_FMT */
+    /* Evaluation of Code expression in THROW_ERROR_FMT (evaluated twice in current THROW_ERROR_FMT macro) */
     side_effect_calls = 0;
     code = run_expect_exit(child_throw_fmt_side_effect, buf, sizeof(buf));
     assert(code == ERR_INVALID_ARGUMENT);

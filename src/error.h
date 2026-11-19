@@ -71,7 +71,8 @@ enum error_code
  * @brief Terminate the process with a `printf`-style formatted error message.
  *
  * Prints the source file name, function name, line number, exit code, and
- * formatted message to `stderr`, then terminates the process with @p Code via `exit()`.
+ * formatted message to `stderr`, then terminates the process with @p Code via
+ * `exit()`.
  *
  * @param Code Exit status or @ref error_code value.
  * @param Fmt  `printf`-style format string literal.
@@ -86,13 +87,9 @@ enum error_code
  * @endcode
  */
 #define THROW_ERROR_FMT(Code, Fmt, ...)                                        \
-    do                                                                         \
-    {                                                                          \
-        const int _better_c_code = (Code);                                     \
-        PRINT_STDERR_FMT("Exited with error code %d:\n\t" Fmt "\n",            \
-                         _better_c_code, __VA_ARGS__);                         \
-        exit(_better_c_code);                                                 \
-    } while (0)
+    PRINT_STDERR_FMT("Exited with error code %d:\n\t" Fmt "\n", (Code),        \
+                     __VA_ARGS__);                                             \
+    exit((Code));
 
 /**
  * @brief Terminate the process with a plain error message string.
@@ -111,13 +108,15 @@ enum error_code
 #define THROW_ERROR(Code, Msg) THROW_ERROR_FMT(Code, "%s", Msg)
 
 /**
- * @brief Assert that a condition is true, terminating with formatted diagnostics if false.
+ * @brief Assert that a condition is true, terminating with formatted
+ * diagnostics if false.
  *
- * If @p Cond evaluates to false (zero), prints diagnostics to `stderr` and terminates
- * the process with @ref ERR_ASSERT_FAILED via @ref THROW_ERROR_FMT.
+ * If @p Cond evaluates to false (zero), prints diagnostics to `stderr` and
+ * terminates the process with @ref ERR_ASSERT_FAILED via @ref THROW_ERROR_FMT.
  *
  * @param Cond Expression evaluating to a boolean condition.
- * @param Fmt  `printf`-style format string literal describing the assertion failure.
+ * @param Fmt  `printf`-style format string literal describing the assertion
+ * failure.
  * @param ...  Arguments corresponding to format specifiers in @p Fmt.
  *
  * @code{.c}
@@ -134,7 +133,8 @@ enum error_code
     } while (0)
 
 /**
- * @brief Assert that a condition is true, terminating with a message string if false.
+ * @brief Assert that a condition is true, terminating with a message string if
+ * false.
  *
  * Shorthand for `ASSERT_FMT(Cond, "%s", Msg)`.
  *

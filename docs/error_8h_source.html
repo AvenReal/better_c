@@ -6,7 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#090d16" media="(prefers-color-scheme: dark)"/>
 <title>My Project: src/error.h Source File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,9 +34,24 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo">
+    <div class="project-default-logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    </div>
+  </td>
   <td id="projectalign">
    <div id="projectname">My Project
    </div>
+  </td>
+  <td id="projectextra">
+    <a href="https://github.com/AvenReal/better_c" target="_blank" rel="noopener noreferrer" class="github-button" title="View GitHub Repository" aria-label="GitHub Repository">
+      <svg class="github-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
   </td>
  </tr>
  </tbody>
@@ -128,30 +149,26 @@ $(function(){initNavTree('error_8h_source.html','',''); });
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="error_8h.html#ae66c6a19355983a1ff0060cd1574f89c">   68</a></span><span class="preprocessor">#define PRINT_STDERR(Msg) PRINT_STDERR_FMT(&quot;%s&quot;, Msg)</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
-<div class="foldopen" id="foldopen00088" data-start="" data-end="">
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a">   88</a></span><span class="preprocessor">#define THROW_ERROR_FMT(Code, Fmt, ...)                                        \</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">    do                                                                         \</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">        const int _better_c_code = (Code);                                     \</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">        PRINT_STDERR_FMT(&quot;Exited with error code %d:\n\t&quot; Fmt &quot;\n&quot;,            \</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">                         _better_c_code, __VA_ARGS__);                         \</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">        exit(_better_c_code);                                                 \</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">    } while (0)</span></div>
+<div class="foldopen" id="foldopen00089" data-start="" data-end="">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a">   89</a></span><span class="preprocessor">#define THROW_ERROR_FMT(Code, Fmt, ...)                                        \</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="preprocessor">    PRINT_STDERR_FMT(&quot;Exited with error code %d:\n\t&quot; Fmt &quot;\n&quot;, (Code),        \</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">                     __VA_ARGS__);                                             \</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">    exit((Code));</span></div>
 </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c">  111</a></span><span class="preprocessor">#define THROW_ERROR(Code, Msg) THROW_ERROR_FMT(Code, &quot;%s&quot;, Msg)</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span></div>
-<div class="foldopen" id="foldopen00127" data-start="" data-end="">
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="error_8h.html#a13a8f9ab337133e9f625400470ada562">  127</a></span><span class="preprocessor">#define ASSERT_FMT(Cond, Fmt, ...)                                             \</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">    do                                                                         \</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">        if (!(Cond))                                                           \</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor">        {                                                                      \</span></div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">            THROW_ERROR_FMT(ERR_ASSERT_FAILED, Fmt, __VA_ARGS__);              \</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">        }                                                                      \</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">    } while (0)</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c">  108</a></span><span class="preprocessor">#define THROW_ERROR(Code, Msg) THROW_ERROR_FMT(Code, &quot;%s&quot;, Msg)</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="foldopen" id="foldopen00126" data-start="" data-end="">
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="error_8h.html#a13a8f9ab337133e9f625400470ada562">  126</a></span><span class="preprocessor">#define ASSERT_FMT(Cond, Fmt, ...)                                             \</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">    do                                                                         \</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">    {                                                                          \</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">        if (!(Cond))                                                           \</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">        {                                                                      \</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor">            THROW_ERROR_FMT(ERR_ASSERT_FAILED, Fmt, __VA_ARGS__);              \</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">        }                                                                      \</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="preprocessor">    } while (0)</span></div>
 </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="error_8h.html#a8b38395544ba1f5273dee43d43ca817b">  148</a></span><span class="preprocessor">#define ASSERT(Cond, Msg) ASSERT_FMT(Cond, &quot;%s&quot;, Msg)</span></div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="preprocessor">#endif </span><span class="comment">/* !BETTER_C_ERROR_H */</span><span class="preprocessor"></span></div>

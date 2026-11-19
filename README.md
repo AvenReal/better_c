@@ -179,11 +179,10 @@ DEFINE_RESULT_NAMED(int *, int_ptr)
 The project uses `make` and standard C11 (`gcc` or `clang`):
 
 ```sh
-make        # builds macros demonstration and test binaries
-make test   # builds and runs test_error, test_result, and macros
+make        # builds test binaries
+make test   # builds and runs test_error and test_result
 make docs   # generates Doxygen documentation in docs/ (for src/ only)
 make clean  # removes compiled binaries
 ```
 
-Full runnable demonstration code can be found in [macros.c](macros.c).
 Separate test suites are located in [tests/test_error.c](tests/test_error.c) and [tests/test_result.c](tests/test_result.c).

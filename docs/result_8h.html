@@ -6,7 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#090d16" media="(prefers-color-scheme: dark)"/>
 <title>My Project: src/result.h File Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,9 +34,24 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo">
+    <div class="project-default-logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    </div>
+  </td>
   <td id="projectalign">
    <div id="projectname">My Project
    </div>
+  </td>
+  <td id="projectextra">
+    <a href="https://github.com/AvenReal/better_c" target="_blank" rel="noopener noreferrer" class="github-button" title="View GitHub Repository" aria-label="GitHub Repository">
+      <svg class="github-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
   </td>
  </tr>
  </tbody>
@@ -158,7 +179,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a4ba5b56b5746cc919cb9b04ef7facb36">DEFINE_RESULT_NAMED</a>(Type, Type)</div>
-<div class="ttc" id="aresult_8h_html_a4ba5b56b5746cc919cb9b04ef7facb36"><div class="ttname"><a href="#a4ba5b56b5746cc919cb9b04ef7facb36">DEFINE_RESULT_NAMED</a></div><div class="ttdeci">#define DEFINE_RESULT_NAMED(Type, Name)</div><div class="ttdoc">Define a Result struct and inline constructors under an explicit name.</div><div class="ttdef"><b>Definition</b> result.h:95</div></div>
+<div class="ttc" id="aresult_8h_html_a4ba5b56b5746cc919cb9b04ef7facb36"><div class="ttname"><a href="#a4ba5b56b5746cc919cb9b04ef7facb36">DEFINE_RESULT_NAMED</a></div><div class="ttdeci">#define DEFINE_RESULT_NAMED(Type, Name)</div><div class="ttdoc">Define a Result struct and inline constructors under an explicit name.</div><div class="ttdef"><b>Definition</b> result.h:98</div></div>
 </div><!-- fragment -->
 <p>Define a Result struct and inline constructors for a single-word type. </p>
 <p>Shorthand for <span class="tt"><a class="el" href="#a4ba5b56b5746cc919cb9b04ef7facb36" title="Define a Result struct and inline constructors under an explicit name.">DEFINE_RESULT_NAMED(Type, Type)</a></span>.</p>
@@ -171,7 +192,7 @@ Macros</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Do not place a trailing semicolon after this macro when compiling with <span class="tt">-Wpedantic</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a5edb4a6d0a53ae670598bb4ddf672492">DEFINE_RESULT</a>(<span class="keywordtype">int</span>)</div>
 <div class="line"><a class="code hl_define" href="#a5edb4a6d0a53ae670598bb4ddf672492">DEFINE_RESULT</a>(<span class="keywordtype">double</span>)</div>
-<div class="ttc" id="aresult_8h_html_a5edb4a6d0a53ae670598bb4ddf672492"><div class="ttname"><a href="#a5edb4a6d0a53ae670598bb4ddf672492">DEFINE_RESULT</a></div><div class="ttdeci">#define DEFINE_RESULT(Type)</div><div class="ttdoc">Define a Result struct and inline constructors for a single-word type.</div><div class="ttdef"><b>Definition</b> result.h:134</div></div>
+<div class="ttc" id="aresult_8h_html_a5edb4a6d0a53ae670598bb4ddf672492"><div class="ttname"><a href="#a5edb4a6d0a53ae670598bb4ddf672492">DEFINE_RESULT</a></div><div class="ttdeci">#define DEFINE_RESULT(Type)</div><div class="ttdoc">Define a Result struct and inline constructors for a single-word type.</div><div class="ttdef"><b>Definition</b> result.h:137</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -219,14 +240,15 @@ Macros</h2></td></tr>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da5c708decdcbd7d8c9fddd8d9e75828a1"><div class="ttname"><a href="error_8h.html#a88a76ee847c844cc47b94caac600689da5c708decdcbd7d8c9fddd8d9e75828a1">ERR_UNKNOWN</a></div><div class="ttdeci">@ ERR_UNKNOWN</div><div class="ttdef"><b>Definition</b> error.h:36</div></div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927"><div class="ttname"><a href="error_8h.html#a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927">ERR_NO_ERROR</a></div><div class="ttdeci">@ ERR_NO_ERROR</div><div class="ttdef"><b>Definition</b> error.h:30</div></div>
 <div class="ttc" id="aresult_8h_html_a332a7ebbfd39292d87fad7d9e0a84654"><div class="ttname"><a href="#a332a7ebbfd39292d87fad7d9e0a84654">RESULT</a></div><div class="ttdeci">#define RESULT(Name)</div><div class="ttdoc">Expand to the Result struct type name associated with Name.</div><div class="ttdef"><b>Definition</b> result.h:30</div></div>
-<div class="ttc" id="aresult_8h_html_a66d0838d7411335c16054e95d8acdd72"><div class="ttname"><a href="#a66d0838d7411335c16054e95d8acdd72">DEFINE_RESULT_UNION</a></div><div class="ttdeci">#define DEFINE_RESULT_UNION(Name, Type)</div><div class="ttdoc">Define the payload union type for a Result holding Type or an error message.</div><div class="ttdef"><b>Definition</b> result.h:60</div></div>
+<div class="ttc" id="aresult_8h_html_a66d0838d7411335c16054e95d8acdd72"><div class="ttname"><a href="#a66d0838d7411335c16054e95d8acdd72">DEFINE_RESULT_UNION</a></div><div class="ttdeci">#define DEFINE_RESULT_UNION(Name, Type)</div><div class="ttdoc">Define the payload union type for a Result holding Type or an error message.</div><div class="ttdef"><b>Definition</b> result.h:61</div></div>
 </div><!-- fragment -->
 <p>Define a Result struct and inline constructors under an explicit name. </p>
 <p>Generates:</p><ul>
 <li><span class="tt">union &lt;Name&gt;_result_union</span> with <span class="tt">Type ok</span> and <span class="tt">const char *err</span> via <a class="el" href="#a66d0838d7411335c16054e95d8acdd72" title="DEFINE_RESULT_UNION">DEFINE_RESULT_UNION</a></li>
 <li><span class="tt">struct &lt;Name&gt;_result</span> with <span class="tt">enum <a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689d" title="Application error codes shared by THROW_ERROR and Result types.">error_code</a> status</span> and <span class="tt"><a class="el" href="#a112a3079fafbd174f823feed0dc8f97d" title="Expand to the Result payload union type name associated with Name.">RESULT_UNION(Name)</a> value</span></li>
 <li><span class="tt">static inline <a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Name&gt;_result_ok(Type value)</span></li>
-<li><span class="tt">static inline <a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Name&gt;_result_err(enum error_code code, const char *error_msg)</span> (coercing <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927">ERR_NO_ERROR</a></span> to <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da5c708decdcbd7d8c9fddd8d9e75828a1">ERR_UNKNOWN</a></span>)</li>
+<li><span class="tt">static inline <a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Name&gt;_result_err(enum error_code code, const
+char *error_msg)</span> (coercing <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927">ERR_NO_ERROR</a></span> to <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da5c708decdcbd7d8c9fddd8d9e75828a1">ERR_UNKNOWN</a></span>)</li>
 </ul>
 <p>Use this macro for multi-word types, enums, structs, unions, pointers, struct pointers, pointer-to-pointers, and <span class="tt">const</span>-qualified types.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -300,12 +322,13 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">_GET_RESULT_ERR_CHOOSER(__VA_ARGS__, _GET_RESULT_ERR_4,                    \</div>
-<div class="line">                        _GET_RESULT_ERR_3, _unused,                        \</div>
-<div class="line">                        _GET_RESULT_ERR_1, 0)(__VA_ARGS__)</div>
+<b>Value:</b><div class="fragment"><div class="line">_GET_RESULT_ERR_CHOOSER(__VA_ARGS__, _GET_RESULT_ERR_4, _GET_RESULT_ERR_3, \</div>
+<div class="line">                        _unused, _GET_RESULT_ERR_1, 0)(__VA_ARGS__)</div>
 </div><!-- fragment -->
 <p>Retrieve or unwrap the error message from a Result. </p>
-<p>When passed a single argument <span class="tt"><a class="el" href="#a66a4baeee742b1b48c4467dffa46c9f5" title="Retrieve or unwrap the error message from a Result.">GET_RESULT_ERR(Res)</a></span>, retrieves the <span class="tt">const char *</span> error string from the result variable without accessing the union member directly. When passed three arguments <span class="tt"><a class="el" href="#a66a4baeee742b1b48c4467dffa46c9f5" title="Retrieve or unwrap the error message from a Result.">GET_RESULT_ERR(Type, Var, Expr)</a></span> or four arguments <span class="tt"><a class="el" href="#a66a4baeee742b1b48c4467dffa46c9f5" title="Retrieve or unwrap the error message from a Result.">GET_RESULT_ERR(Type, Var, Expr, Name)</a></span>, evaluates <span class="tt">Expr</span> and unwraps the error message into <span class="tt">const char *Var</span>, throwing <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da55a05a69540ceb3c268b7d5c2bdda1d4">ERR_RESULT_IS_OK</a></span> if <span class="tt">Expr</span> was successful.</p>
+<p>When passed a single argument <span class="tt"><a class="el" href="#a66a4baeee742b1b48c4467dffa46c9f5" title="Retrieve or unwrap the error message from a Result.">GET_RESULT_ERR(Res)</a></span>, retrieves the <span class="tt">const
+char *</span> error string from the result variable without accessing the union member directly. When passed three arguments <span class="tt"><a class="el" href="#a66a4baeee742b1b48c4467dffa46c9f5" title="Retrieve or unwrap the error message from a Result.">GET_RESULT_ERR(Type, Var,
+Expr)</a></span> or four arguments <span class="tt"><a class="el" href="#a66a4baeee742b1b48c4467dffa46c9f5" title="Retrieve or unwrap the error message from a Result.">GET_RESULT_ERR(Type, Var, Expr, Name)</a></span>, evaluates <span class="tt">Expr</span> and unwraps the error message into <span class="tt">const char *Var</span>, throwing <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da55a05a69540ceb3c268b7d5c2bdda1d4">ERR_RESULT_IS_OK</a></span> if <span class="tt">Expr</span> was successful.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">...</td><td>Variable arguments: either <span class="tt">(Res)</span> for 1-arg inspection, or <span class="tt">(Type, Var, Expr)</span> / <span class="tt">(Type, Var, Expr, Name)</span> for statement unwrapping. </td></tr>
@@ -349,12 +372,13 @@ Macros</h2></td></tr>
 <div class="line">    THROW_ERROR(<a class="code hl_enumvalue" href="error_8h.html#a88a76ee847c844cc47b94caac600689da55a05a69540ceb3c268b7d5c2bdda1d4">ERR_RESULT_IS_OK</a>,                                          \</div>
 <div class="line">                <span class="stringliteral">&quot;Tried to get err of &quot;</span> #Expr <span class="stringliteral">&quot; but it&#39;s an ok.&quot;</span>);          \</div>
 <div class="line">}                                                                          \</div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">char</span> *Var = Var##_result.value.err;</div>
+<div class="line">Var = Var##_result.value.err;</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da55a05a69540ceb3c268b7d5c2bdda1d4"><div class="ttname"><a href="error_8h.html#a88a76ee847c844cc47b94caac600689da55a05a69540ceb3c268b7d5c2bdda1d4">ERR_RESULT_IS_OK</a></div><div class="ttdeci">@ ERR_RESULT_IS_OK</div><div class="ttdef"><b>Definition</b> error.h:35</div></div>
-<div class="ttc" id="aresult_8h_html_a4bfce36ca3f23b7e7ec32f11ed89bef1"><div class="ttname"><a href="#a4bfce36ca3f23b7e7ec32f11ed89bef1">RESULT_IS_OK</a></div><div class="ttdeci">#define RESULT_IS_OK(...)</div><div class="ttdoc">Check whether a Result value represents success.</div><div class="ttdef"><b>Definition</b> result.h:182</div></div>
+<div class="ttc" id="aresult_8h_html_a4bfce36ca3f23b7e7ec32f11ed89bef1"><div class="ttname"><a href="#a4bfce36ca3f23b7e7ec32f11ed89bef1">RESULT_IS_OK</a></div><div class="ttdeci">#define RESULT_IS_OK(...)</div><div class="ttdoc">Check whether a Result value represents success.</div><div class="ttdef"><b>Definition</b> result.h:185</div></div>
 </div><!-- fragment -->
 <p>Unwrap a named Result's error message into <code class="param">Var</code>. </p>
-<p>Statement macro that evaluates <code class="param">Expr</code> into <span class="tt"><a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Var&gt;_result</span>. If <span class="tt">&lt;Var&gt;_result</span> is an OK Result, terminates the process via <a class="el" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a> with <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da55a05a69540ceb3c268b7d5c2bdda1d4">ERR_RESULT_IS_OK</a></span>. Otherwise, declares <span class="tt">char *Var = &lt;Var&gt;_result.value.err;</span>.</p>
+<p>Statement macro that evaluates <code class="param">Expr</code> into <span class="tt"><a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Var&gt;_result</span>. If <span class="tt">&lt;Var&gt;_result</span> is an OK Result, terminates the process via <a class="el" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a> with <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da55a05a69540ceb3c268b7d5c2bdda1d4">ERR_RESULT_IS_OK</a></span>. Otherwise, declares <span class="tt">char *Var =
+&lt;Var&gt;_result.value.err;</span>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Type</td><td>C object type of the Result's <span class="tt">.ok</span> payload. </td></tr>
@@ -367,7 +391,7 @@ Macros</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies, and omit a trailing <span class="tt">;</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#ab7f533f55f59ec563cc35030f80c5d5f">GET_RESULT_ERR_NAMED</a>(<span class="keyword">struct</span> point, err_msg, make_point_err(), point)</div>
 <div class="line">printf(<span class="stringliteral">&quot;Error: %s\n&quot;</span>, err_msg);</div>
-<div class="ttc" id="aresult_8h_html_ab7f533f55f59ec563cc35030f80c5d5f"><div class="ttname"><a href="#ab7f533f55f59ec563cc35030f80c5d5f">GET_RESULT_ERR_NAMED</a></div><div class="ttdeci">#define GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)</div><div class="ttdoc">Unwrap a named Result&#39;s error message into Var.</div><div class="ttdef"><b>Definition</b> result.h:218</div></div>
+<div class="ttc" id="aresult_8h_html_ab7f533f55f59ec563cc35030f80c5d5f"><div class="ttname"><a href="#ab7f533f55f59ec563cc35030f80c5d5f">GET_RESULT_ERR_NAMED</a></div><div class="ttdeci">#define GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)</div><div class="ttdoc">Unwrap a named Result&#39;s error message into Var.</div><div class="ttdef"><b>Definition</b> result.h:222</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -395,7 +419,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#ac8597705fb7f9bed69082cb846882738">GET_RESULT_OK_NAMED</a>(Type, Var, Expr, Type)</div>
-<div class="ttc" id="aresult_8h_html_ac8597705fb7f9bed69082cb846882738"><div class="ttname"><a href="#ac8597705fb7f9bed69082cb846882738">GET_RESULT_OK_NAMED</a></div><div class="ttdeci">#define GET_RESULT_OK_NAMED(Type, Var, Expr, Name)</div><div class="ttdoc">Unwrap a named Result into Var, terminating the process on error.</div><div class="ttdef"><b>Definition</b> result.h:384</div></div>
+<div class="ttc" id="aresult_8h_html_ac8597705fb7f9bed69082cb846882738"><div class="ttname"><a href="#ac8597705fb7f9bed69082cb846882738">GET_RESULT_OK_NAMED</a></div><div class="ttdeci">#define GET_RESULT_OK_NAMED(Type, Var, Expr, Name)</div><div class="ttdoc">Unwrap a named Result into Var, terminating the process on error.</div><div class="ttdef"><b>Definition</b> result.h:391</div></div>
 </div><!-- fragment -->
 <p>Unwrap a single-word Result into <code class="param">Var</code>, terminating the process on error. </p>
 <p>Shorthand for <span class="tt"><a class="el" href="#ac8597705fb7f9bed69082cb846882738" title="Unwrap a named Result into Var, terminating the process on error.">GET_RESULT_OK_NAMED(Type, Var, Expr, Type)</a></span>.</p>
@@ -409,7 +433,7 @@ Macros</h2></td></tr>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies, and omit a trailing <span class="tt">;</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a22b33937b3fd5a192242bfddd5e2d07b">GET_RESULT_OK</a>(<span class="keywordtype">int</span>, quotient, divide(10, 2))</div>
-<div class="ttc" id="aresult_8h_html_a22b33937b3fd5a192242bfddd5e2d07b"><div class="ttname"><a href="#a22b33937b3fd5a192242bfddd5e2d07b">GET_RESULT_OK</a></div><div class="ttdeci">#define GET_RESULT_OK(Type, Var, Expr)</div><div class="ttdoc">Unwrap a single-word Result into Var, terminating the process on error.</div><div class="ttdef"><b>Definition</b> result.h:408</div></div>
+<div class="ttc" id="aresult_8h_html_a22b33937b3fd5a192242bfddd5e2d07b"><div class="ttname"><a href="#a22b33937b3fd5a192242bfddd5e2d07b">GET_RESULT_OK</a></div><div class="ttdeci">#define GET_RESULT_OK(Type, Var, Expr)</div><div class="ttdoc">Unwrap a single-word Result into Var, terminating the process on error.</div><div class="ttdef"><b>Definition</b> result.h:415</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -447,8 +471,8 @@ Macros</h2></td></tr>
 <div class="line">                <span class="stringliteral">&quot;Tried to get result value but &quot;</span> #Expr                     \</div>
 <div class="line">                <span class="stringliteral">&quot; returned an error.&quot;</span>);)</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da8c7fd522ab3ede6660652b6c435f2906"><div class="ttname"><a href="error_8h.html#a88a76ee847c844cc47b94caac600689da8c7fd522ab3ede6660652b6c435f2906">ERR_RESULT_IS_ERR</a></div><div class="ttdeci">@ ERR_RESULT_IS_ERR</div><div class="ttdef"><b>Definition</b> error.h:34</div></div>
-<div class="ttc" id="aerror_8h_html_a9c0b47872efb49f62c1de05d81e53e7c"><div class="ttname"><a href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a></div><div class="ttdeci">#define THROW_ERROR(Code, Msg)</div><div class="ttdoc">Terminate the process with a plain error message string.</div><div class="ttdef"><b>Definition</b> error.h:111</div></div>
-<div class="ttc" id="aresult_8h_html_a31eb97b130c28f058afaaa9a632b6a78"><div class="ttname"><a href="#a31eb97b130c28f058afaaa9a632b6a78">GET_RESULT_OK_NAMED_OR_ELSE</a></div><div class="ttdeci">#define GET_RESULT_OK_NAMED_OR_ELSE(Type, Var, Expr, Name,...)</div><div class="ttdoc">Unwrap a named Result into Var, running a custom handler on error.</div><div class="ttdef"><b>Definition</b> result.h:283</div></div>
+<div class="ttc" id="aerror_8h_html_a9c0b47872efb49f62c1de05d81e53e7c"><div class="ttname"><a href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a></div><div class="ttdeci">#define THROW_ERROR(Code, Msg)</div><div class="ttdoc">Terminate the process with a plain error message string.</div><div class="ttdef"><b>Definition</b> error.h:108</div></div>
+<div class="ttc" id="aresult_8h_html_a31eb97b130c28f058afaaa9a632b6a78"><div class="ttname"><a href="#a31eb97b130c28f058afaaa9a632b6a78">GET_RESULT_OK_NAMED_OR_ELSE</a></div><div class="ttdeci">#define GET_RESULT_OK_NAMED_OR_ELSE(Type, Var, Expr, Name,...)</div><div class="ttdoc">Unwrap a named Result into Var, running a custom handler on error.</div><div class="ttdef"><b>Definition</b> result.h:289</div></div>
 </div><!-- fragment -->
 <p>Unwrap a named Result into <code class="param">Var</code>, terminating the process on error. </p>
 <p>Calls <a class="el" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a> with <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da8c7fd522ab3ede6660652b6c435f2906">ERR_RESULT_IS_ERR</a></span> if <code class="param">Expr</code> returns an error.</p>
@@ -500,8 +524,8 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a332a7ebbfd39292d87fad7d9e0a84654">RESULT</a>(Name) Var##_result = (Expr);                                        \</div>
-<div class="line">Type Var = <a class="code hl_define" href="#a4bfce36ca3f23b7e7ec32f11ed89bef1">RESULT_IS_OK</a>(Var##_result) ? Var##_result.value.ok             \</div>
-<div class="line">                                      : (__VA_ARGS__);</div>
+<div class="line">Type Var =                                                                 \</div>
+<div class="line">    RESULT_IS_OK(Var##_result) ? Var##_result.value.ok : (__VA_ARGS__);</div>
 </div><!-- fragment -->
 <p>Unwrap a named Result into <code class="param">Var</code>, or use a fallback expression on error. </p>
 <p>Statement macro that evaluates <code class="param">Expr</code> once into <span class="tt"><a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Var&gt;_result</span> and initializes <span class="tt">Type Var</span> with <span class="tt">&lt;Var&gt;_result.value.ok</span> on success or the lazily evaluated fallback expression <span class="tt">...</span> on error.</p>
@@ -518,7 +542,7 @@ Macros</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies, and omit a trailing <span class="tt">;</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#abc01580a267ef93ef1b3588f7e41473b">GET_RESULT_OK_NAMED_OR</a>(<span class="keyword">struct</span> point, pt, make_point_err(), point,</div>
 <div class="line">                    (<span class="keyword">struct</span> point){ .x = 0, .y = 0 })</div>
-<div class="ttc" id="aresult_8h_html_abc01580a267ef93ef1b3588f7e41473b"><div class="ttname"><a href="#abc01580a267ef93ef1b3588f7e41473b">GET_RESULT_OK_NAMED_OR</a></div><div class="ttdeci">#define GET_RESULT_OK_NAMED_OR(Type, Var, Expr, Name,...)</div><div class="ttdoc">Unwrap a named Result into Var, or use a fallback expression on error.</div><div class="ttdef"><b>Definition</b> result.h:342</div></div>
+<div class="ttc" id="aresult_8h_html_abc01580a267ef93ef1b3588f7e41473b"><div class="ttname"><a href="#abc01580a267ef93ef1b3588f7e41473b">GET_RESULT_OK_NAMED_OR</a></div><div class="ttdeci">#define GET_RESULT_OK_NAMED_OR(Type, Var, Expr, Name,...)</div><div class="ttdoc">Unwrap a named Result into Var, or use a fallback expression on error.</div><div class="ttdef"><b>Definition</b> result.h:349</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -566,12 +590,14 @@ Macros</h2></td></tr>
 <div class="line">                <span class="stringliteral">&quot;&quot;</span> #Var                                                    \</div>
 <div class="line">                <span class="stringliteral">&quot;_result is still an error type but should not be.&quot;</span>);      \</div>
 <div class="line">}                                                                          \</div>
-<div class="line">Type Var = Var##_result.value.ok;</div>
-<div class="ttc" id="aresult_8h_html_a3891971c286544996926c2919a9110d5"><div class="ttname"><a href="#a3891971c286544996926c2919a9110d5">RESULT_IS_ERR</a></div><div class="ttdeci">#define RESULT_IS_ERR(...)</div><div class="ttdoc">Check whether a Result value represents an error.</div><div class="ttdef"><b>Definition</b> result.h:196</div></div>
+<div class="line">Var = Var##_result.value.ok;</div>
+<div class="ttc" id="aresult_8h_html_a3891971c286544996926c2919a9110d5"><div class="ttname"><a href="#a3891971c286544996926c2919a9110d5">RESULT_IS_ERR</a></div><div class="ttdeci">#define RESULT_IS_ERR(...)</div><div class="ttdoc">Check whether a Result value represents an error.</div><div class="ttdef"><b>Definition</b> result.h:199</div></div>
 </div><!-- fragment -->
 <p>Unwrap a named Result into <code class="param">Var</code>, running a custom handler on error. </p>
-<p>Statement macro that evaluates <code class="param">Expr</code> once into <span class="tt"><a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Var&gt;_result</span>, executes <span class="tt">...</span> if <span class="tt">&lt;Var&gt;_result</span> is an error, asserts that <span class="tt">&lt;Var&gt;_result</span> is no longer an error (terminating via <a class="el" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a> with <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da8c7fd522ab3ede6660652b6c435f2906">ERR_RESULT_IS_ERR</a></span> otherwise), and declares <span class="tt">Type Var = &lt;Var&gt;_result.value.ok;</span>.</p>
-<p>Inside the error handler, <span class="tt">&lt;Var&gt;_result.status</span> and <span class="tt">&lt;Var&gt;_result.value.err</span> are available. The handler must either transfer control (<span class="tt">return</span>, <span class="tt">break</span>, <span class="tt">continue</span>, <span class="tt">goto</span>, <a class="el" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a>, <a class="el" href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a" title="THROW_ERROR_FMT">THROW_ERROR_FMT</a>) or recover by setting <span class="tt">&lt;Var&gt;_result.status = <a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927">ERR_NO_ERROR</a></span> and <span class="tt">&lt;Var&gt;_result.value.ok = ...</span>.</p>
+<p>Statement macro that evaluates <code class="param">Expr</code> once into <span class="tt"><a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a> &lt;Var&gt;_result</span>, executes <span class="tt">...</span> if <span class="tt">&lt;Var&gt;_result</span> is an error, asserts that <span class="tt">&lt;Var&gt;_result</span> is no longer an error (terminating via <a class="el" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a> with <span class="tt"><a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da8c7fd522ab3ede6660652b6c435f2906">ERR_RESULT_IS_ERR</a></span> otherwise), and declares <span class="tt">Type Var =
+&lt;Var&gt;_result.value.ok;</span>.</p>
+<p>Inside the error handler, <span class="tt">&lt;Var&gt;_result.status</span> and <span class="tt">&lt;Var&gt;_result.value.err</span> are available. The handler must either transfer control (<span class="tt">return</span>, <span class="tt">break</span>, <span class="tt">continue</span>, <span class="tt">goto</span>, <a class="el" href="error_8h.html#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a>, <a class="el" href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a" title="THROW_ERROR_FMT">THROW_ERROR_FMT</a>) or recover by setting <span class="tt">&lt;Var&gt;_result.status = <a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927">ERR_NO_ERROR</a></span> and <span class="tt">&lt;Var&gt;_result.value.ok =
+...</span>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Type</td><td>C type of the unwrapped variable <code class="param">Var</code>. </td></tr>
@@ -585,8 +611,8 @@ Macros</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies, and omit a trailing <span class="tt">;</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a31eb97b130c28f058afaaa9a632b6a78">GET_RESULT_OK_NAMED_OR_ELSE</a>(<span class="keyword">struct</span> point *, p, alloc_point(1, 2), point_ptr,</div>
 <div class="line">{</div>
-<div class="line">    fprintf(stderr, <span class="stringliteral">&quot;Error (%d): %s\n&quot;</span>, (<span class="keywordtype">int</span>)p_result.status, p_result.value.err);</div>
-<div class="line">    <span class="keywordflow">return</span> 1;</div>
+<div class="line">    fprintf(stderr, <span class="stringliteral">&quot;Error (%d): %s\n&quot;</span>, (<span class="keywordtype">int</span>)p_result.status,</div>
+<div class="line">p_result.value.err); <span class="keywordflow">return</span> 1;</div>
 <div class="line">})</div>
 </div><!-- fragment --> 
 </div>
@@ -634,7 +660,7 @@ Macros</h2></td></tr>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies, and omit a trailing <span class="tt">;</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a382e78640017efb094e25322b52a3bf7">GET_RESULT_OK_OR</a>(<span class="keywordtype">int</span>, safe_div, divide(10, 0), -1)</div>
-<div class="ttc" id="aresult_8h_html_a382e78640017efb094e25322b52a3bf7"><div class="ttname"><a href="#a382e78640017efb094e25322b52a3bf7">GET_RESULT_OK_OR</a></div><div class="ttdeci">#define GET_RESULT_OK_OR(Type, Var, Expr,...)</div><div class="ttdoc">Unwrap a single-word Result into Var, or use a fallback expression on error.</div><div class="ttdef"><b>Definition</b> result.h:364</div></div>
+<div class="ttc" id="aresult_8h_html_a382e78640017efb094e25322b52a3bf7"><div class="ttname"><a href="#a382e78640017efb094e25322b52a3bf7">GET_RESULT_OK_OR</a></div><div class="ttdeci">#define GET_RESULT_OK_OR(Type, Var, Expr,...)</div><div class="ttdoc">Unwrap a single-word Result into Var, or use a fallback expression on error.</div><div class="ttdef"><b>Definition</b> result.h:371</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -681,10 +707,11 @@ Macros</h2></td></tr>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies, and omit a trailing <span class="tt">;</span>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a3c8a590bd38e9528ee2ad8a7b97c60b2">GET_RESULT_OK_OR_ELSE</a>(<span class="keywordtype">int</span>, q, divide(10, 0), {</div>
-<div class="line">    <a class="code hl_define" href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(q_result.status, <span class="stringliteral">&quot;divide failed: %s&quot;</span>, q_result.value.err);</div>
+<div class="line">    <a class="code hl_define" href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(q_result.status, <span class="stringliteral">&quot;divide failed: %s&quot;</span>,</div>
+<div class="line">q_result.value.err);</div>
 <div class="line">})</div>
-<div class="ttc" id="aerror_8h_html_a11b02b3431c3f669945fea0002d70e2a"><div class="ttname"><a href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a></div><div class="ttdeci">#define THROW_ERROR_FMT(Code, Fmt,...)</div><div class="ttdoc">Terminate the process with a printf-style formatted error message.</div><div class="ttdef"><b>Definition</b> error.h:88</div></div>
-<div class="ttc" id="aresult_8h_html_a3c8a590bd38e9528ee2ad8a7b97c60b2"><div class="ttname"><a href="#a3c8a590bd38e9528ee2ad8a7b97c60b2">GET_RESULT_OK_OR_ELSE</a></div><div class="ttdeci">#define GET_RESULT_OK_OR_ELSE(Type, Var, Expr,...)</div><div class="ttdoc">Unwrap a single-word Result into Var, running a custom handler on error.</div><div class="ttdef"><b>Definition</b> result.h:317</div></div>
+<div class="ttc" id="aerror_8h_html_a11b02b3431c3f669945fea0002d70e2a"><div class="ttname"><a href="error_8h.html#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a></div><div class="ttdeci">#define THROW_ERROR_FMT(Code, Fmt,...)</div><div class="ttdoc">Terminate the process with a printf-style formatted error message.</div><div class="ttdef"><b>Definition</b> error.h:89</div></div>
+<div class="ttc" id="aresult_8h_html_a3c8a590bd38e9528ee2ad8a7b97c60b2"><div class="ttname"><a href="#a3c8a590bd38e9528ee2ad8a7b97c60b2">GET_RESULT_OK_OR_ELSE</a></div><div class="ttdeci">#define GET_RESULT_OK_OR_ELSE(Type, Var, Expr,...)</div><div class="ttdoc">Unwrap a single-word Result into Var, running a custom handler on error.</div><div class="ttdef"><b>Definition</b> result.h:324</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -841,7 +868,7 @@ Macros</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A <span class="tt"><a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a></span> value with <span class="tt">.status != <a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927">ERR_NO_ERROR</a></span>.</dd></dl>
 <div class="fragment"><div class="line"><span class="keywordflow">return</span> <a class="code hl_define" href="#a1e1a2442563f3c6199a3b10c94d29dac">SET_RESULT_ERR</a>(<span class="keywordtype">int</span>, <a class="code hl_enumvalue" href="error_8h.html#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a>, <span class="stringliteral">&quot;Division by zero&quot;</span>);</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260"><div class="ttname"><a href="error_8h.html#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a></div><div class="ttdeci">@ ERR_INVALID_ARGUMENT</div><div class="ttdef"><b>Definition</b> error.h:33</div></div>
-<div class="ttc" id="aresult_8h_html_a1e1a2442563f3c6199a3b10c94d29dac"><div class="ttname"><a href="#a1e1a2442563f3c6199a3b10c94d29dac">SET_RESULT_ERR</a></div><div class="ttdeci">#define SET_RESULT_ERR(Name, Code, Message)</div><div class="ttdoc">Construct an error RESULT(Name) with an error code and message.</div><div class="ttdef"><b>Definition</b> result.h:168</div></div>
+<div class="ttc" id="aresult_8h_html_a1e1a2442563f3c6199a3b10c94d29dac"><div class="ttname"><a href="#a1e1a2442563f3c6199a3b10c94d29dac">SET_RESULT_ERR</a></div><div class="ttdeci">#define SET_RESULT_ERR(Name, Code, Message)</div><div class="ttdoc">Construct an error RESULT(Name) with an error code and message.</div><div class="ttdef"><b>Definition</b> result.h:171</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -875,7 +902,7 @@ Macros</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <span class="tt"><a class="el" href="#a332a7ebbfd39292d87fad7d9e0a84654" title="Expand to the Result struct type name associated with Name.">RESULT(Name)</a></span> value with <span class="tt">.status == <a class="el" href="error_8h.html#a88a76ee847c844cc47b94caac600689da94c4ca8995ad36230ba79a109323a927">ERR_NO_ERROR</a></span>.</dd></dl>
 <div class="fragment"><div class="line"><span class="keywordflow">return</span> <a class="code hl_define" href="#a826c837785d81d9572c4c9fe6df0c26d">SET_RESULT_OK</a>(<span class="keywordtype">int</span>, a / b);</div>
-<div class="ttc" id="aresult_8h_html_a826c837785d81d9572c4c9fe6df0c26d"><div class="ttname"><a href="#a826c837785d81d9572c4c9fe6df0c26d">SET_RESULT_OK</a></div><div class="ttdeci">#define SET_RESULT_OK(Name, Value)</div><div class="ttdoc">Construct a successful RESULT(Name) holding Value.</div><div class="ttdef"><b>Definition</b> result.h:150</div></div>
+<div class="ttc" id="aresult_8h_html_a826c837785d81d9572c4c9fe6df0c26d"><div class="ttname"><a href="#a826c837785d81d9572c4c9fe6df0c26d">SET_RESULT_OK</a></div><div class="ttdeci">#define SET_RESULT_OK(Name, Value)</div><div class="ttdoc">Construct a successful RESULT(Name) holding Value.</div><div class="ttdef"><b>Definition</b> result.h:153</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

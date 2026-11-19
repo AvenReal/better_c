@@ -6,10 +6,7 @@ TESTS = test_error test_result
 
 .PHONY: all test clean docs
 
-all: macros $(TESTS)
-
-macros: macros.c $(HEADERS)
-	$(CC) $(CFLAGS) macros.c -o macros
+all: $(TESTS)
 
 test_error: tests/test_error.c src/error.h
 	$(CC) $(CFLAGS) tests/test_error.c -o test_error
@@ -17,13 +14,12 @@ test_error: tests/test_error.c src/error.h
 test_result: tests/test_result.c $(HEADERS)
 	$(CC) $(CFLAGS) tests/test_result.c -o test_result
 
-test: $(TESTS) macros
+test: $(TESTS)
 	./test_error
 	./test_result
-	./macros
 
 docs:
 	doxygen Doxyfile
 
 clean:
-	rm -f macros $(TESTS)
+	rm -f $(TESTS)
