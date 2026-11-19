@@ -124,13 +124,11 @@ enum error_code
  * @endcode
  */
 #define ASSERT_FMT(Cond, Fmt, ...)                                             \
-    do                                                                         \
+    if (!(Cond))                                                               \
     {                                                                          \
-        if (!(Cond))                                                           \
-        {                                                                      \
-            THROW_ERROR_FMT(ERR_ASSERT_FAILED, Fmt, __VA_ARGS__);              \
-        }                                                                      \
-    } while (0)
+        THROW_ERROR_FMT(ERR_ASSERT_FAILED,                                     \
+                        "Assertion: " #Cond " failed: " Fmt, __VA_ARGS__);     \
+    }
 
 /**
  * @brief Assert that a condition is true, terminating with a message string if
