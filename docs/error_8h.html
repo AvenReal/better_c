@@ -192,7 +192,7 @@ Enumerations</h2></td></tr>
   </dd>
 </dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a>(len &gt; 0, <span class="stringliteral">&quot;Length must be strictly positive&quot;</span>);</div>
-<div class="ttc" id="aerror_8h_html_a8b38395544ba1f5273dee43d43ca817b"><div class="ttname"><a href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a></div><div class="ttdeci">#define ASSERT(Cond, Msg)</div><div class="ttdoc">Assert that a condition is true, terminating with a message string if false.</div><div class="ttdef"><b>Definition</b> error.h:148</div></div>
+<div class="ttc" id="aerror_8h_html_a8b38395544ba1f5273dee43d43ca817b"><div class="ttname"><a href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a></div><div class="ttdeci">#define ASSERT(Cond, Msg)</div><div class="ttdoc">Assert that a condition is true, terminating with a message string if false.</div><div class="ttdef"><b>Definition</b> error.h:146</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -219,13 +219,11 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span>                                                                         \</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!(Cond))                                                               \</div>
 <div class="line">{                                                                          \</div>
-<div class="line">    if (!(Cond))                                                           \</div>
-<div class="line">    {                                                                      \</div>
-<div class="line">        THROW_ERROR_FMT(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a>, Fmt, __VA_ARGS__);              \</div>
-<div class="line">    }                                                                      \</div>
-<div class="line">} <span class="keywordflow">while</span> (0)</div>
+<div class="line">    THROW_ERROR_FMT(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a>,                                     \</div>
+<div class="line">                    <span class="stringliteral">&quot;Assertion: &quot;</span> #Cond <span class="stringliteral">&quot; failed: &quot;</span> Fmt, __VA_ARGS__);     \</div>
+<div class="line">}</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a></div><div class="ttdeci">@ ERR_ASSERT_FAILED</div><div class="ttdef"><b>Definition</b> error.h:31</div></div>
 </div><!-- fragment -->
 <p>Assert that a condition is true, terminating with formatted diagnostics if false. </p>
