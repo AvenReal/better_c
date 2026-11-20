@@ -16,7 +16,7 @@ https://avenreal.github.io/better_c/
 The library consists of two modular headers located in `src/`:
 
 - [`src/error.h`](src/error.h): Diagnostic error codes, fatal error termination macros (`THROW_ERROR`, `THROW_ERROR_FMT`), assertion checks (`ASSERT`, `ASSERT_FMT`), and stderr logging utilities.
-- [`src/result.h`](src/result.h): Type-safe `Result` definitions, constructors (`SET_RESULT_OK`, `SET_RESULT_ERR`), predicate checks (`RESULT_IS_OK`, `RESULT_IS_ERR`), and unwrapping macros (`GET_RESULT_OK`, `GET_RESULT_OK_OR`, `GET_RESULT_OK_OR_ELSE`, `GET_RESULT_ERR`).
+- [`src/result.h`](src/result.h): Type-safe `Result` definitions, constructors (`RESULT_OK`, `RESULT_ERR`), predicate checks (`RESULT_IS_OK`, `RESULT_IS_ERR`), and unwrapping macros (`GET_RESULT_OK`, `GET_RESULT_OK_OR`, `GET_RESULT_OK_OR_ELSE`, `GET_RESULT_ERR`).
 
 ---
 
@@ -75,15 +75,15 @@ int main(void)
   - `RESULT(Name)`: Expands to `struct Name_result`.
   - `RESULT_UNION(Name)`: Expands to `union Name_result_union`.
 - **Constructors**:
-  - `SET_RESULT_OK(Name, Value)`: Constructs a successful Result holding `Value` with `ERR_NO_ERROR`.
-  - `SET_RESULT_ERR(Name, Code, Message)`: Constructs an error Result holding `Message` (`const char *`) with `Code`. Coerces `ERR_NO_ERROR` to `ERR_UNKNOWN`.
+  - `RESULT_OK(Name, Value)`: Constructs a successful Result holding `Value` with `ERR_NO_ERROR`.
+  - `RESULT_ERR(Name, Code, Message)`: Constructs an error Result holding `Message` (`const char *`) with `Code`. Coerces `ERR_NO_ERROR` to `ERR_UNKNOWN`.
 - **Predicates**:
   - `RESULT_IS_OK(...)`: Checks if `.status == ERR_NO_ERROR`.
   - `RESULT_IS_ERR(...)`: Checks if `.status != ERR_NO_ERROR`.
 - **Unwrapping & Pattern Matching**:
   - `GET_RESULT_OK(Type, Var, Expr)` / `GET_RESULT_OK_NAMED(...)`: Unwraps into `Type Var`, immediately terminating with `ERR_RESULT_IS_ERR` on error.
   - `GET_RESULT_OK_OR(Type, Var, Expr, Fallback)`: Unwraps into `Type Var`, lazily evaluating `Fallback` on error.
-  - `GET_RESULT_OK_OR_ELSE(Type, Var, Expr, Handler)`: Unwraps into `Type Var`, executing `Handler` on error with `<Var>_result` in scope for inspection or recovery via `SET_RESULT_OK`.
+  - `GET_RESULT_OK_OR_ELSE(Type, Var, Expr, Handler)`: Unwraps into `Type Var`, executing `Handler` on error with `<Var>_result` in scope for inspection or recovery via `RESULT_OK`.
   - `GET_RESULT_ERR(Res)` / `GET_RESULT_ERR(Type, Var, Expr)`: Safely inspects or unwraps error message string into `const char *Var`.
 
 ### Simple Example
@@ -99,9 +99,9 @@ static RESULT(int) divide(int a, int b)
 {
     if (b == 0)
     {
-        return SET_RESULT_ERR(int, ERR_INVALID_ARGUMENT, "Cannot divide by zero");
+        return RESULT_ERR(int, ERR_INVALID_ARGUMENT, "Cannot divide by zero");
     }
-    return SET_RESULT_OK(int, a / b);
+    return RESULT_OK(int, a / b);
 }
 
 int main(void)
@@ -118,7 +118,7 @@ int main(void)
     GET_RESULT_OK_OR_ELSE(int, handled, divide(10, 0), {
         printf("Division error caught (%d): %s\n",
                handled_result.status, GET_RESULT_ERR(handled_result));
-        handled_result = SET_RESULT_OK(int, 0); /* recover with 0 */
+        handled_result = RESULT_OK(int, 0); /* recover with 0 */
     })
     printf("Recovered value: %d\n", handled);
 
@@ -133,12 +133,15 @@ int main(void)
 ### Error Handling (`src/error.h`)
 
 #### `THROW_ERROR(Code, Msg)`
+
 Terminates the process with file, function, line number, exit code, and plain string `Msg` to `stderr`. Safe for runtime strings since `Msg` is printed through `"%s"`.
 
 #### `THROW_ERROR_FMT(Code, Fmt, ...)`
+
 Terminates the process with file, function, line number, exit code, and a formatted message matching `Fmt`.
 
 #### `ASSERT(Cond, Msg)` and `ASSERT_FMT(Cond, Fmt, ...)`
+
 Evaluates `Cond`. If false (`0`), terminates the process with `ERR_ASSERT_FAILED` and diagnostics.
 
 ---
@@ -146,7 +149,9 @@ Evaluates `Cond`. If false (`0`), terminates the process with `ERR_ASSERT_FAILED
 ### Typed Results (`src/result.h`)
 
 #### Result Struct Architecture
+
 Result types encapsulate their payload inside a dedicated union member `.value`:
+
 - `RESULT_UNION(Name)` (`union Name_result_union`):
   - `Type ok;` — payload on success.
   - `const char *err;` — error message on failure.
@@ -154,9 +159,10 @@ Result types encapsulate their payload inside a dedicated union member `.value`:
   - `enum error_code status;` — error status code.
   - `RESULT_UNION(Name) value;` — union holding either `ok` or `err`.
 
-*Note:* `.ok` and `.err` should not be accessed directly as struct members; access them via the standard macros (`SET_RESULT_OK`, `SET_RESULT_ERR`, `GET_RESULT_OK*`, `GET_RESULT_ERR*`).
+_Note:_ `.ok` and `.err` should not be accessed directly as struct members; access them via the standard macros (`RESULT_OK`, `RESULT_ERR`, `GET_RESULT_OK*`, `GET_RESULT_ERR*`).
 
 #### Defining Types
+
 ```c
 DEFINE_RESULT(int)
 DEFINE_RESULT(double)
@@ -166,9 +172,10 @@ DEFINE_RESULT_NAMED(int *, int_ptr)
 ```
 
 #### Unwrapping Variations
+
 - **`GET_RESULT_OK(Type, Var, Expr)`**: Evaluates `Expr`. On error, terminates via `THROW_ERROR(ERR_RESULT_IS_ERR, ...)`.
 - **`GET_RESULT_OK_OR(Type, Var, Expr, Fallback)`**: Evaluates `Expr`. If error, assigns `Fallback` expression lazily.
-- **`GET_RESULT_OK_OR_ELSE(Type, Var, Expr, Handler)`**: Evaluates `Expr`. On error, executes `Handler`. The handler must either transfer control (`return`, `break`, `continue`, `goto`, `THROW_ERROR`) or recover explicitly with `<Var>_result = SET_RESULT_OK(Name, value);`.
+- **`GET_RESULT_OK_OR_ELSE(Type, Var, Expr, Handler)`**: Evaluates `Expr`. On error, executes `Handler`. The handler must either transfer control (`return`, `break`, `continue`, `goto`, `THROW_ERROR`) or recover explicitly with `<Var>_result = RESULT_OK(Name, value);`.
 - **`GET_RESULT_ERR(Res)`**: Returns `const char *` error string from an existing result variable.
 - **`GET_RESULT_ERR(Type, Var, Expr)`**: Evaluates `Expr` and unwraps error message into `const char *Var`. If `Expr` succeeded, terminates with `ERR_RESULT_IS_OK`.
 

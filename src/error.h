@@ -127,7 +127,7 @@ enum error_code
     if (!(Cond))                                                               \
     {                                                                          \
         THROW_ERROR_FMT(ERR_ASSERT_FAILED,                                     \
-                        "Assertion: " #Cond " failed: " Fmt, __VA_ARGS__);     \
+                        "Assertion: (" #Cond ") failed: " Fmt, __VA_ARGS__);   \
     }
 
 /**

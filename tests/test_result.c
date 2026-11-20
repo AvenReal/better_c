@@ -81,19 +81,19 @@ static RESULT(int) divide(int a, int b)
 {
     if (b == 0)
     {
-        return SET_RESULT_ERR(int, ERR_INVALID_ARGUMENT, "Division by zero");
+        return RESULT_ERR(int, ERR_INVALID_ARGUMENT, "Division by zero");
     }
-    return SET_RESULT_OK(int, a / b);
+    return RESULT_OK(int, a / b);
 }
 
 static RESULT(point) fail_point(void)
 {
-    return SET_RESULT_ERR(point, ERR_INVALID_ARGUMENT, "Point creation failed");
+    return RESULT_ERR(point, ERR_INVALID_ARGUMENT, "Point creation failed");
 }
 
 static RESULT(int) fail_null_msg(void)
 {
-    return SET_RESULT_ERR(int, ERR_MEMORY_ERROR, NULL);
+    return RESULT_ERR(int, ERR_MEMORY_ERROR, NULL);
 }
 
 static int side_effect_calls = 0;
@@ -101,13 +101,13 @@ static int side_effect_calls = 0;
 static RESULT(int) counted_ok(int v)
 {
     side_effect_calls++;
-    return SET_RESULT_OK(int, v);
+    return RESULT_OK(int, v);
 }
 
 static RESULT(int) counted_err(void)
 {
     side_effect_calls++;
-    return SET_RESULT_ERR(int, ERR_INVALID_ARGUMENT, "counted failure");
+    return RESULT_ERR(int, ERR_INVALID_ARGUMENT, "counted failure");
 }
 
 static int default_eval_calls = 0;
@@ -201,7 +201,7 @@ static void child_get_result_err_named_on_ok_throws(void)
 {
     const char *err_msg;
     GET_RESULT_ERR_NAMED(struct point, err_msg,
-                         SET_RESULT_OK(point, ((struct point){ 1, 2 })), point)
+                         RESULT_OK(point, ((struct point){ 1, 2 })), point)
     (void)err_msg;
 }
 
@@ -209,7 +209,7 @@ static void child_get_result_err_4arg_on_ok_throws(void)
 {
     const char *err_msg;
     GET_RESULT_ERR(struct point, err_msg,
-                   SET_RESULT_OK(point, ((struct point){ 1, 2 })), point)
+                   RESULT_OK(point, ((struct point){ 1, 2 })), point)
     (void)err_msg;
 }
 
@@ -221,37 +221,37 @@ static void test_define_result_all_types(void)
     assert(i_val == 42);
 
     double d_val;
-    GET_RESULT_OK(double, d_val, SET_RESULT_OK(double, 3.5))
+    GET_RESULT_OK(double, d_val, RESULT_OK(double, 3.5))
     assert(d_val == 3.5);
 
     unsigned long ul_val;
-    GET_RESULT_OK_NAMED(unsigned long, ul_val, SET_RESULT_OK(ulong, 123456UL),
+    GET_RESULT_OK_NAMED(unsigned long, ul_val, RESULT_OK(ulong, 123456UL),
                         ulong)
     assert(ul_val == 123456UL);
 
     int ci_val;
-    GET_RESULT_OK_NAMED(int, ci_val, SET_RESULT_OK(const_int, 77), const_int)
+    GET_RESULT_OK_NAMED(int, ci_val, RESULT_OK(const_int, 77), const_int)
     assert(ci_val == 77);
 
     struct point cp_init = { .x = 8, .y = 9 };
     struct point cp_val;
-    GET_RESULT_OK_NAMED(struct point, cp_val,
-                        SET_RESULT_OK(const_point, cp_init), const_point)
+    GET_RESULT_OK_NAMED(struct point, cp_val, RESULT_OK(const_point, cp_init),
+                        const_point)
     assert(cp_val.x == 8 && cp_val.y == 9);
 
     int cp_target = 10;
     int *cip_val;
     GET_RESULT_OK_NAMED(int *const, cip_val,
-                        SET_RESULT_OK(const_int_ptr, &cp_target), const_int_ptr)
+                        RESULT_OK(const_int_ptr, &cp_target), const_int_ptr)
     assert(cip_val == &cp_target);
 
     /* Unwrapping const-qualified and volatile-qualified result variables */
-    const RESULT(int) const_res = SET_RESULT_OK(int, 88);
+    const RESULT(int) const_res = RESULT_OK(int, 88);
     int from_const;
     GET_RESULT_OK(int, from_const, const_res)
     assert(from_const == 88);
 
-    volatile RESULT(int) vol_res = SET_RESULT_OK(int, 89);
+    volatile RESULT(int) vol_res = RESULT_OK(int, 89);
     int from_vol;
     GET_RESULT_OK(int, from_vol, vol_res)
     assert(from_vol == 89);
@@ -262,12 +262,11 @@ static void test_define_result_all_types(void)
     /* Enums & enum pointers */
     enum color col = COLOR_BLUE;
     enum color c_val;
-    GET_RESULT_OK_NAMED(enum color, c_val, SET_RESULT_OK(color, COLOR_GREEN),
-                        color)
+    GET_RESULT_OK_NAMED(enum color, c_val, RESULT_OK(color, COLOR_GREEN), color)
     assert(c_val == COLOR_GREEN);
 
     enum color *cp_col;
-    GET_RESULT_OK_NAMED(enum color *, cp_col, SET_RESULT_OK(color_ptr, &col),
+    GET_RESULT_OK_NAMED(enum color *, cp_col, RESULT_OK(color_ptr, &col),
                         color_ptr)
     assert(cp_col == &col);
 
@@ -275,44 +274,43 @@ static void test_define_result_all_types(void)
      */
     struct point pt = { .x = 3, .y = 4 };
     struct point pt_out;
-    GET_RESULT_OK_NAMED(
-        struct point, pt_out,
-        SET_RESULT_OK(point, ((struct point){ .x = 3, .y = 4 })), point)
+    GET_RESULT_OK_NAMED(struct point, pt_out,
+                        RESULT_OK(point, ((struct point){ .x = 3, .y = 4 })),
+                        point)
     assert(pt_out.x == 3 && pt_out.y == 4);
 
     struct nested_box box = { .origin = { 1, 2 }, .width = 10, .height = 20 };
     struct nested_box box_out;
-    GET_RESULT_OK_NAMED(struct nested_box, box_out,
-                        SET_RESULT_OK(nested_box, box), nested_box)
+    GET_RESULT_OK_NAMED(struct nested_box, box_out, RESULT_OK(nested_box, box),
+                        nested_box)
     assert(box_out.origin.x == 1 && box_out.height == 20);
 
     struct ro_record ro = { .id = 42, .value = 7 };
     struct ro_record ro_out;
-    GET_RESULT_OK_NAMED(struct ro_record, ro_out, SET_RESULT_OK(ro_record, ro),
+    GET_RESULT_OK_NAMED(struct ro_record, ro_out, RESULT_OK(ro_record, ro),
                         ro_record)
     assert(ro_out.id == 42 && ro_out.value == 7);
 
     struct bitfield_flags bf_in = { .active = 1, .mode = 5 };
     struct bitfield_flags bf_out;
     GET_RESULT_OK_NAMED(struct bitfield_flags, bf_out,
-                        SET_RESULT_OK(bitfield_flags, bf_in), bitfield_flags)
+                        RESULT_OK(bitfield_flags, bf_in), bitfield_flags)
     assert(bf_out.active == 1 && bf_out.mode == 5);
 
     GET_RESULT_OK_NAMED_OR(union payload, pl_fallback,
-                           SET_RESULT_ERR(payload, ERR_UNKNOWN, "pl"), payload,
+                           RESULT_ERR(payload, ERR_UNKNOWN, "pl"), payload,
                            ((union payload){ .as_int = 555 }))
     assert(pl_fallback.as_int == 555);
 
     /* Unions & union pointers */
     union payload pl = { .as_int = 99 };
     union payload pl_out;
-    GET_RESULT_OK_NAMED(union payload, pl_out, SET_RESULT_OK(payload, pl),
-                        payload)
+    GET_RESULT_OK_NAMED(union payload, pl_out, RESULT_OK(payload, pl), payload)
     assert(pl_out.as_int == 99);
 
     union payload *pl_ptr_out;
     GET_RESULT_OK_NAMED(union payload *, pl_ptr_out,
-                        SET_RESULT_OK(payload_ptr, &pl), payload_ptr)
+                        RESULT_OK(payload_ptr, &pl), payload_ptr)
     assert(pl_ptr_out == &pl);
 
     /* Pointers */
@@ -322,16 +320,15 @@ static void test_define_result_all_types(void)
     int ***val_ppp = &val_pp;
 
     int *ip_out;
-    GET_RESULT_OK_NAMED(int *, ip_out, SET_RESULT_OK(int_ptr, val_p), int_ptr)
+    GET_RESULT_OK_NAMED(int *, ip_out, RESULT_OK(int_ptr, val_p), int_ptr)
     assert(ip_out == val_p);
 
     const char *s_out;
-    GET_RESULT_OK_NAMED(const char *, s_out, SET_RESULT_OK(cstr, "hello"), cstr)
+    GET_RESULT_OK_NAMED(const char *, s_out, RESULT_OK(cstr, "hello"), cstr)
     assert(strcmp(s_out, "hello") == 0);
 
     void *vp_out;
-    GET_RESULT_OK_NAMED(void *, vp_out, SET_RESULT_OK(void_ptr, val_p),
-                        void_ptr)
+    GET_RESULT_OK_NAMED(void *, vp_out, RESULT_OK(void_ptr, val_p), void_ptr)
     assert(vp_out == (void *)val_p);
 
     /* Struct pointers, const struct pointers, opaque forward-declared ptr */
@@ -339,44 +336,43 @@ static void test_define_result_all_types(void)
     struct point **pt_pp = &pt_p;
 
     struct point *pt_p_out;
-    GET_RESULT_OK_NAMED(struct point *, pt_p_out,
-                        SET_RESULT_OK(point_ptr, pt_p), point_ptr)
+    GET_RESULT_OK_NAMED(struct point *, pt_p_out, RESULT_OK(point_ptr, pt_p),
+                        point_ptr)
     assert(pt_p_out == pt_p);
 
     const struct point *cpt_p_out;
     GET_RESULT_OK_NAMED(const struct point *, cpt_p_out,
-                        SET_RESULT_OK(const_point_ptr, pt_p), const_point_ptr)
+                        RESULT_OK(const_point_ptr, pt_p), const_point_ptr)
     assert(cpt_p_out == pt_p);
 
     struct opaque_handle *opaque = NULL;
     struct opaque_handle *op_out;
     GET_RESULT_OK_NAMED(struct opaque_handle *, op_out,
-                        SET_RESULT_OK(opaque_ptr, opaque), opaque_ptr)
+                        RESULT_OK(opaque_ptr, opaque), opaque_ptr)
     assert(op_out == NULL);
 
     /* Pointer pointers & triple pointers */
     int **ipp_out;
-    GET_RESULT_OK_NAMED(int **, ipp_out, SET_RESULT_OK(int_ptr_ptr, val_pp),
+    GET_RESULT_OK_NAMED(int **, ipp_out, RESULT_OK(int_ptr_ptr, val_pp),
                         int_ptr_ptr)
     assert(ipp_out == val_pp && **ipp_out == 123);
 
     struct point **pt_pp_out;
     GET_RESULT_OK_NAMED(struct point **, pt_pp_out,
-                        SET_RESULT_OK(point_ptr_ptr, pt_pp), point_ptr_ptr)
+                        RESULT_OK(point_ptr_ptr, pt_pp), point_ptr_ptr)
     assert(pt_pp_out == pt_pp && (**pt_pp_out).y == 4);
 
     int ***ippp_out;
-    GET_RESULT_OK_NAMED(int ***, ippp_out,
-                        SET_RESULT_OK(int_ptr_ptr_ptr, val_ppp),
+    GET_RESULT_OK_NAMED(int ***, ippp_out, RESULT_OK(int_ptr_ptr_ptr, val_ppp),
                         int_ptr_ptr_ptr)
     assert(ippp_out == val_ppp && ***ippp_out == 123);
 
     /* Predicates & ERR_NO_ERROR guard */
-    RESULT(int) ok_res = SET_RESULT_OK(int, 1);
-    RESULT(int) err_res = SET_RESULT_ERR(int, ERR_INVALID_ARGUMENT, "bad");
-    RESULT(int) coerced_res = SET_RESULT_ERR(int, ERR_NO_ERROR, "oops");
+    RESULT(int) ok_res = RESULT_OK(int, 1);
+    RESULT(int) err_res = RESULT_ERR(int, ERR_INVALID_ARGUMENT, "bad");
+    RESULT(int) coerced_res = RESULT_ERR(int, ERR_NO_ERROR, "oops");
     assert(RESULT_IS_OK(ok_res) && !RESULT_IS_ERR(ok_res));
-    assert(RESULT_IS_OK(SET_RESULT_OK(int, 2)));
+    assert(RESULT_IS_OK(RESULT_OK(int, 2)));
     assert(RESULT_IS_ERR(err_res) && !RESULT_IS_OK(err_res));
     assert(RESULT_IS_ERR(coerced_res) && coerced_res.status == ERR_UNKNOWN);
 }
@@ -439,9 +435,9 @@ static void test_get_result_variants(void)
     struct point *p_zero;
     GET_RESULT_OK_NAMED_OR_ELSE(
         struct point *, p_zero,
-        SET_RESULT_ERR(point_ptr, ERR_MEMORY_ERROR, "not a point"), point_ptr, {
+        RESULT_ERR(point_ptr, ERR_MEMORY_ERROR, "not a point"), point_ptr, {
             handler_ran = true;
-            p_zero_result = SET_RESULT_OK(point_ptr, NULL);
+            p_zero_result = RESULT_OK(point_ptr, NULL);
         })
     assert(handler_ran);
     assert(p_zero == NULL);
@@ -449,11 +445,10 @@ static void test_get_result_variants(void)
     struct nested_box b_zero;
     GET_RESULT_OK_NAMED_OR_ELSE(
         struct nested_box, b_zero,
-        SET_RESULT_ERR(nested_box, ERR_INVALID_ARGUMENT, "bad box"), nested_box,
-        {
+        RESULT_ERR(nested_box, ERR_INVALID_ARGUMENT, "bad box"), nested_box, {
             assert(b_zero_result.status == ERR_INVALID_ARGUMENT);
-            b_zero_result = SET_RESULT_OK(
-                nested_box, ((struct nested_box){ { 0, 0 }, 0, 0 }));
+            b_zero_result =
+                RESULT_OK(nested_box, ((struct nested_box){ { 0, 0 }, 0, 0 }));
         })
     assert(b_zero.origin.x == 0 && b_zero.origin.y == 0 && b_zero.width == 0
            && b_zero.height == 0);
@@ -461,7 +456,7 @@ static void test_get_result_variants(void)
     /* Explicit recovery inside OR_ELSE handler */
     int recovered;
     GET_RESULT_OK_OR_ELSE(int, recovered, divide(10, 0),
-                          { recovered_result = SET_RESULT_OK(int, 123); })
+                          { recovered_result = RESULT_OK(int, 123); })
     assert(recovered == 123);
 
     /* NULL error message preserved via GET_RESULT_ERR */
@@ -470,7 +465,7 @@ static void test_get_result_variants(void)
     GET_RESULT_OK_OR_ELSE(int, z, fail_null_msg(), {
         saw_null = (z_result.status == ERR_MEMORY_ERROR
                     && GET_RESULT_ERR(z_result) == NULL);
-        z_result = SET_RESULT_OK(int, 0);
+        z_result = RESULT_OK(int, 0);
     })
     assert(saw_null && z == 0);
 
@@ -488,55 +483,55 @@ static void test_get_result_variants(void)
     assert(fallback_pt.x == 9 && fallback_pt.y == 8);
 
     GET_RESULT_OK_NAMED_OR(unsigned long, fallback_ul,
-                           SET_RESULT_ERR(ulong, ERR_UNKNOWN, "ul"), ulong,
+                           RESULT_ERR(ulong, ERR_UNKNOWN, "ul"), ulong,
                            999999UL)
     assert(fallback_ul == 999999UL);
 
     GET_RESULT_OK_NAMED_OR(enum color, fallback_col,
-                           SET_RESULT_ERR(color, ERR_UNKNOWN, "col"), color,
+                           RESULT_ERR(color, ERR_UNKNOWN, "col"), color,
                            COLOR_BLUE)
     assert(fallback_col == COLOR_BLUE);
 
     /* GET_RESULT_OK_NAMED_OR with const types */
     GET_RESULT_OK_NAMED_OR(const int, fallback_ci,
-                           SET_RESULT_ERR(const_int, ERR_UNKNOWN, "ci"),
-                           const_int, 42)
+                           RESULT_ERR(const_int, ERR_UNKNOWN, "ci"), const_int,
+                           42)
     assert(fallback_ci == 42);
 
     struct point fallback_cp_val_init = { .x = 10, .y = 20 };
     GET_RESULT_OK_NAMED_OR(const struct point, fallback_cp_val,
-                           SET_RESULT_ERR(const_point, ERR_UNKNOWN, "cp"),
+                           RESULT_ERR(const_point, ERR_UNKNOWN, "cp"),
                            const_point, fallback_cp_val_init)
     assert(fallback_cp_val.x == 10 && fallback_cp_val.y == 20);
 
     /* GET_RESULT_OK_NAMED_OR with pointer to const types */
     struct point fallback_cp_init = { .x = 10, .y = 20 };
     GET_RESULT_OK_NAMED_OR(const struct point *, fallback_cp,
-                           SET_RESULT_ERR(const_point_ptr, ERR_UNKNOWN, "cp"),
+                           RESULT_ERR(const_point_ptr, ERR_UNKNOWN, "cp"),
                            const_point_ptr, &fallback_cp_init)
     assert(fallback_cp->x == 10 && fallback_cp->y == 20);
 
     GET_RESULT_OK_NAMED_OR(const char *, fallback_cstr,
-                           SET_RESULT_ERR(cstr, ERR_UNKNOWN, "cstr"),
-                           cstr, "fallback")
+                           RESULT_ERR(cstr, ERR_UNKNOWN, "cstr"), cstr,
+                           "fallback")
     assert(strcmp(fallback_cstr, "fallback") == 0);
 
     struct ro_record fallback_ro_init = { .id = 1, .value = 2 };
     GET_RESULT_OK_NAMED_OR(struct ro_record, fallback_ro,
-                           SET_RESULT_ERR(ro_record, ERR_UNKNOWN, "ro"),
-                           ro_record, fallback_ro_init)
+                           RESULT_ERR(ro_record, ERR_UNKNOWN, "ro"), ro_record,
+                           fallback_ro_init)
     assert(fallback_ro.id == 1 && fallback_ro.value == 2);
 
     /* GET_RESULT_OK_NAMED_OR on OK result with named type */
     GET_RESULT_OK_NAMED_OR(struct point, ok_pt,
-                           SET_RESULT_OK(point, ((struct point){ .x = 1, .y = 2 })),
+                           RESULT_OK(point, ((struct point){ .x = 1, .y = 2 })),
                            point, ((struct point){ .x = 9, .y = 8 }))
     assert(ok_pt.x == 1 && ok_pt.y == 2);
 
     /* GET_RESULT_OK_NAMED_OR with bitfields */
     struct bitfield_flags fallback_bf_init = { .active = 0, .mode = 3 };
     GET_RESULT_OK_NAMED_OR(struct bitfield_flags, fallback_bf,
-                           SET_RESULT_ERR(bitfield_flags, ERR_UNKNOWN, "bf"),
+                           RESULT_ERR(bitfield_flags, ERR_UNKNOWN, "bf"),
                            bitfield_flags, fallback_bf_init)
     assert(fallback_bf.active == 0 && fallback_bf.mode == 3);
 
@@ -567,7 +562,8 @@ static void test_get_result_variants(void)
     side_effect_calls = 0;
     const char *once_err_eval;
     GET_RESULT_ERR(int, once_err_eval, counted_err())
-    assert(strcmp(once_err_eval, "counted failure") == 0 && side_effect_calls == 1);
+    assert(strcmp(once_err_eval, "counted failure") == 0
+           && side_effect_calls == 1);
 
     /* Control flow: continue, break, and goto inside handlers */
     int sum = 0;

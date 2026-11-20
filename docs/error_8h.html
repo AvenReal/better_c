@@ -222,7 +222,7 @@ Enumerations</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!(Cond))                                                               \</div>
 <div class="line">{                                                                          \</div>
 <div class="line">    THROW_ERROR_FMT(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a>,                                     \</div>
-<div class="line">                    <span class="stringliteral">&quot;Assertion: &quot;</span> #Cond <span class="stringliteral">&quot; failed: &quot;</span> Fmt, __VA_ARGS__);     \</div>
+<div class="line">                    <span class="stringliteral">&quot;Assertion: (&quot;</span> #Cond <span class="stringliteral">&quot;) failed: &quot;</span> Fmt, __VA_ARGS__);   \</div>
 <div class="line">}</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689da21d0fd0f410a3f427210e1ff5c099810">ERR_ASSERT_FAILED</a></div><div class="ttdeci">@ ERR_ASSERT_FAILED</div><div class="ttdef"><b>Definition</b> error.h:31</div></div>
 </div><!-- fragment -->
@@ -336,10 +336,10 @@ Enumerations</h2></td></tr>
   </dd>
 </dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1">ERR_MEMORY_ERROR</a>, <span class="stringliteral">&quot;Out of memory&quot;</span>);</div>
-<div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(res.status, <a class="code hl_define" href="result_8h.html#a66a4baeee742b1b48c4467dffa46c9f5">GET_RESULT_ERR</a>(res));</div>
+<div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(res.status, <a class="code hl_define" href="result_8h.html#ade71dc94de4f0f450ef93dc3baae8102">GET_RESULT_ERR</a>(res));</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1">ERR_MEMORY_ERROR</a></div><div class="ttdeci">@ ERR_MEMORY_ERROR</div><div class="ttdef"><b>Definition</b> error.h:32</div></div>
 <div class="ttc" id="aerror_8h_html_a9c0b47872efb49f62c1de05d81e53e7c"><div class="ttname"><a href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a></div><div class="ttdeci">#define THROW_ERROR(Code, Msg)</div><div class="ttdoc">Terminate the process with a plain error message string.</div><div class="ttdef"><b>Definition</b> error.h:108</div></div>
-<div class="ttc" id="aresult_8h_html_a66a4baeee742b1b48c4467dffa46c9f5"><div class="ttname"><a href="result_8h.html#a66a4baeee742b1b48c4467dffa46c9f5">GET_RESULT_ERR</a></div><div class="ttdeci">#define GET_RESULT_ERR(...)</div><div class="ttdoc">Retrieve or unwrap the error message from a Result.</div><div class="ttdef"><b>Definition</b> result.h:253</div></div>
+<div class="ttc" id="aresult_8h_html_ade71dc94de4f0f450ef93dc3baae8102"><div class="ttname"><a href="result_8h.html#ade71dc94de4f0f450ef93dc3baae8102">GET_RESULT_ERR</a></div><div class="ttdeci">#define GET_RESULT_ERR(Type, Var, Expr)</div><div class="ttdoc">Retrieve or unwrap the error message from a Result.</div><div class="ttdef"><b>Definition</b> result.h:244</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -382,7 +382,7 @@ Enumerations</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>For plain messages without format arguments, use <a class="el" href="#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a>.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a>, <span class="stringliteral">&quot;Invalid index: %zu&quot;</span>, idx);</div>
-<div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(res.status, <span class="stringliteral">&quot;Operation failed: %s&quot;</span>, <a class="code hl_define" href="result_8h.html#a66a4baeee742b1b48c4467dffa46c9f5">GET_RESULT_ERR</a>(res));</div>
+<div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(res.status, <span class="stringliteral">&quot;Operation failed: %s&quot;</span>, <a class="code hl_define" href="result_8h.html#ade71dc94de4f0f450ef93dc3baae8102">GET_RESULT_ERR</a>(res));</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a></div><div class="ttdeci">@ ERR_INVALID_ARGUMENT</div><div class="ttdef"><b>Definition</b> error.h:33</div></div>
 </div><!-- fragment --> 
 </div>

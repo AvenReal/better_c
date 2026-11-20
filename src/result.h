@@ -147,10 +147,10 @@
  * @return A `RESULT(Name)` value with `.status == ERR_NO_ERROR`.
  *
  * @code{.c}
- * return SET_RESULT_OK(int, a / b);
+ * return RESULT_OK(int, a / b);
  * @endcode
  */
-#define SET_RESULT_OK(Name, Value) Name##_result_ok(Value)
+#define RESULT_OK(Name, Value) Name##_result_ok(Value)
 
 /**
  * @brief Construct an error `RESULT(Name)` with an error code and message.
@@ -165,10 +165,10 @@
  * @return A `RESULT(Name)` value with `.status != ERR_NO_ERROR`.
  *
  * @code{.c}
- * return SET_RESULT_ERR(int, ERR_INVALID_ARGUMENT, "Division by zero");
+ * return RESULT_ERR(int, ERR_INVALID_ARGUMENT, "Division by zero");
  * @endcode
  */
-#define SET_RESULT_ERR(Name, Code, Message) Name##_result_err((Code), (Message))
+#define RESULT_ERR(Name, Code, Message) Name##_result_err((Code), (Message))
 
 /**
  * @brief Check whether a Result value represents success.
@@ -228,15 +228,6 @@
     }                                                                          \
     Var = Var##_result.value.err;
 
-/** @cond INTERNAL */
-#define _GET_RESULT_ERR_1(Res) ((Res).value.err)
-#define _GET_RESULT_ERR_3(Type, Var, Expr)                                     \
-    GET_RESULT_ERR_NAMED(Type, Var, Expr, Type)
-#define _GET_RESULT_ERR_4(Type, Var, Expr, Name)                               \
-    GET_RESULT_ERR_NAMED(Type, Var, Expr, Name)
-#define _GET_RESULT_ERR_CHOOSER(_1, _2, _3, _4, NAME, ...) NAME
-/** @endcond */
-
 /**
  * @brief Retrieve or unwrap the error message from a Result.
  *
@@ -250,10 +241,8 @@
  * @param ... Variable arguments: either `(Res)` for 1-arg inspection, or
  * `(Type, Var, Expr)` / `(Type, Var, Expr, Name)` for statement unwrapping.
  */
-#define GET_RESULT_ERR(...)                                                    \
-    _GET_RESULT_ERR_CHOOSER(__VA_ARGS__, _GET_RESULT_ERR_4, _GET_RESULT_ERR_3, \
-                            _unused, _GET_RESULT_ERR_1, 0)(__VA_ARGS__)
-
+#define GET_RESULT_ERR(Type, Var, Expr)                                        \
+    GET_RESULT_ERR_NAMED(Type, Var, Expr, Type)
 /**
  * @brief Unwrap a named Result into @p Var, running a custom handler on error.
  *
