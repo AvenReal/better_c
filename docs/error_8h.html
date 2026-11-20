@@ -180,7 +180,7 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a>(Cond, <span class="stringliteral">&quot;%s&quot;</span>, Msg)</div>
-<div class="ttc" id="aerror_8h_html_a13a8f9ab337133e9f625400470ada562"><div class="ttname"><a href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a></div><div class="ttdeci">#define ASSERT_FMT(Cond, Fmt,...)</div><div class="ttdoc">Assert that a condition is true, terminating with formatted diagnostics if false.</div><div class="ttdef"><b>Definition</b> error.h:126</div></div>
+<div class="ttc" id="aerror_8h_html_a13a8f9ab337133e9f625400470ada562"><div class="ttname"><a href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a></div><div class="ttdeci">#define ASSERT_FMT(Cond, Fmt,...)</div><div class="ttdoc">Assert that a condition is true, terminating with formatted diagnostics if false.</div><div class="ttdef"><b>Definition</b> error.h:138</div></div>
 </div><!-- fragment -->
 <p>Assert that a condition is true, terminating with a message string if false. </p>
 <p>Shorthand for <span class="tt"><a class="el" href="#a13a8f9ab337133e9f625400470ada562" title="Assert that a condition is true, terminating with formatted diagnostics if false.">ASSERT_FMT</a>(Cond, "s", Msg)</span>.</p>
@@ -191,8 +191,9 @@ Enumerations</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section warning"><dt>Warning</dt><dd>Expands to an <span class="tt">if</span> statement without <span class="tt">do { ... } while (0)</span>. Enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span> branches followed by an <span class="tt">else</span> to prevent dangling <span class="tt">else</span> ambiguities.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a>(len &gt; 0, <span class="stringliteral">&quot;Length must be strictly positive&quot;</span>);</div>
-<div class="ttc" id="aerror_8h_html_a8b38395544ba1f5273dee43d43ca817b"><div class="ttname"><a href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a></div><div class="ttdeci">#define ASSERT(Cond, Msg)</div><div class="ttdoc">Assert that a condition is true, terminating with a message string if false.</div><div class="ttdef"><b>Definition</b> error.h:146</div></div>
+<div class="ttc" id="aerror_8h_html_a8b38395544ba1f5273dee43d43ca817b"><div class="ttname"><a href="#a8b38395544ba1f5273dee43d43ca817b">ASSERT</a></div><div class="ttdeci">#define ASSERT(Cond, Msg)</div><div class="ttdoc">Assert that a condition is true, terminating with a message string if false.</div><div class="ttdef"><b>Definition</b> error.h:162</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -236,6 +237,7 @@ Enumerations</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section warning"><dt>Warning</dt><dd>Expands to an <span class="tt">if</span> statement without <span class="tt">do { ... } while (0)</span>. Enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span> branches followed by an <span class="tt">else</span> to prevent dangling <span class="tt">else</span> ambiguities.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a13a8f9ab337133e9f625400470ada562">ASSERT_FMT</a>(ptr != NULL, <span class="stringliteral">&quot;Pointer %s was NULL&quot;</span>, <span class="stringliteral">&quot;ptr&quot;</span>);</div>
 </div><!-- fragment --> 
 </div>
@@ -324,22 +326,22 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(Code, <span class="stringliteral">&quot;%s&quot;</span>, Msg)</div>
-<div class="ttc" id="aerror_8h_html_a11b02b3431c3f669945fea0002d70e2a"><div class="ttname"><a href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a></div><div class="ttdeci">#define THROW_ERROR_FMT(Code, Fmt,...)</div><div class="ttdoc">Terminate the process with a printf-style formatted error message.</div><div class="ttdef"><b>Definition</b> error.h:89</div></div>
+<div class="ttc" id="aerror_8h_html_a11b02b3431c3f669945fea0002d70e2a"><div class="ttname"><a href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a></div><div class="ttdeci">#define THROW_ERROR_FMT(Code, Fmt,...)</div><div class="ttdoc">Terminate the process with a printf-style formatted error message.</div><div class="ttdef"><b>Definition</b> error.h:93</div></div>
 </div><!-- fragment -->
 <p>Terminate the process with a plain error message string. </p>
 <p>Expands to <span class="tt"><a class="el" href="#a11b02b3431c3f669945fea0002d70e2a" title="Terminate the process with a printf-style formatted error message.">THROW_ERROR_FMT</a>(Code, "s", Msg)</span> so runtime strings are printed safely without format-string interpretation.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Code</td><td>Exit status or <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. </td></tr>
+    <tr><td class="paramname">Code</td><td>Exit status or <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. Evaluated multiple times (once for logging, once for exit). </td></tr>
     <tr><td class="paramname">Msg</td><td>Null-terminated error message string (<span class="tt">const char *</span>).</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1">ERR_MEMORY_ERROR</a>, <span class="stringliteral">&quot;Out of memory&quot;</span>);</div>
-<div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(res.status, <a class="code hl_define" href="result_8h.html#ade71dc94de4f0f450ef93dc3baae8102">GET_RESULT_ERR</a>(res));</div>
+<div class="line"><a class="code hl_define" href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a>(res.status, res.value.err);</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dad8f6bf1e50be18443ecfe0e28b0d8bb1">ERR_MEMORY_ERROR</a></div><div class="ttdeci">@ ERR_MEMORY_ERROR</div><div class="ttdef"><b>Definition</b> error.h:32</div></div>
-<div class="ttc" id="aerror_8h_html_a9c0b47872efb49f62c1de05d81e53e7c"><div class="ttname"><a href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a></div><div class="ttdeci">#define THROW_ERROR(Code, Msg)</div><div class="ttdoc">Terminate the process with a plain error message string.</div><div class="ttdef"><b>Definition</b> error.h:108</div></div>
-<div class="ttc" id="aresult_8h_html_ade71dc94de4f0f450ef93dc3baae8102"><div class="ttname"><a href="result_8h.html#ade71dc94de4f0f450ef93dc3baae8102">GET_RESULT_ERR</a></div><div class="ttdeci">#define GET_RESULT_ERR(Type, Var, Expr)</div><div class="ttdoc">Retrieve or unwrap the error message from a Result.</div><div class="ttdef"><b>Definition</b> result.h:244</div></div>
+<div class="ttc" id="aerror_8h_html_a9c0b47872efb49f62c1de05d81e53e7c"><div class="ttname"><a href="#a9c0b47872efb49f62c1de05d81e53e7c">THROW_ERROR</a></div><div class="ttdeci">#define THROW_ERROR(Code, Msg)</div><div class="ttdoc">Terminate the process with a plain error message string.</div><div class="ttdef"><b>Definition</b> error.h:116</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -374,15 +376,16 @@ Enumerations</h2></td></tr>
 <p>Prints the source file name, function name, line number, exit code, and formatted message to <span class="tt">stderr</span>, then terminates the process with <code class="param">Code</code> via <span class="tt">exit()</span>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Code</td><td>Exit status or <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. </td></tr>
+    <tr><td class="paramname">Code</td><td>Exit status or <a class="el" href="#a88a76ee847c844cc47b94caac600689d" title="error_code">error_code</a> value. Evaluated multiple times (once for logging, once for exit). </td></tr>
     <tr><td class="paramname">Fmt</td><td><span class="tt">printf</span>-style format string literal. </td></tr>
     <tr><td class="paramname">...</td><td>One or more arguments corresponding to format specifiers in <code class="param">Fmt</code>.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>For plain messages without format arguments, use <a class="el" href="#a9c0b47872efb49f62c1de05d81e53e7c" title="THROW_ERROR">THROW_ERROR</a>.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Expands to multiple statements; enclose in <span class="tt">{ ... }</span> inside unbraced <span class="tt">if</span>/<span class="tt">else</span>/<span class="tt">for</span>/<span class="tt">while</span> bodies.</dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(<a class="code hl_enumvalue" href="#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a>, <span class="stringliteral">&quot;Invalid index: %zu&quot;</span>, idx);</div>
-<div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(res.status, <span class="stringliteral">&quot;Operation failed: %s&quot;</span>, <a class="code hl_define" href="result_8h.html#ade71dc94de4f0f450ef93dc3baae8102">GET_RESULT_ERR</a>(res));</div>
+<div class="line"><a class="code hl_define" href="#a11b02b3431c3f669945fea0002d70e2a">THROW_ERROR_FMT</a>(res.status, <span class="stringliteral">&quot;Operation failed: %s&quot;</span>, res.value.err);</div>
 <div class="ttc" id="aerror_8h_html_a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260"><div class="ttname"><a href="#a88a76ee847c844cc47b94caac600689dae620c56be6cfef2f3f5af02e79db0260">ERR_INVALID_ARGUMENT</a></div><div class="ttdeci">@ ERR_INVALID_ARGUMENT</div><div class="ttdef"><b>Definition</b> error.h:33</div></div>
 </div><!-- fragment --> 
 </div>

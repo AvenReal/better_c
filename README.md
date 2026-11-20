@@ -107,14 +107,16 @@ static RESULT(int) divide(int a, int b)
 int main(void)
 {
     /* 1. Unwrapping success */
+    int quotient;
     GET_RESULT_OK(int, quotient, divide(10, 2))
     printf("10 / 2 = %d\n", quotient);
 
-    /* 2. Fallback on error */
+    /* 2. Fallback on error (declares and initializes safe_div) */
     GET_RESULT_OK_OR(int, safe_div, divide(10, 0), -1)
     printf("10 / 0 with fallback = %d\n", safe_div);
 
     /* 3. Handling error with custom logic */
+    int handled;
     GET_RESULT_OK_OR_ELSE(int, handled, divide(10, 0), {
         printf("Division error caught (%d): %s\n",
                handled_result.status, GET_RESULT_ERR(handled_result));

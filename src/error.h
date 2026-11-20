@@ -74,16 +74,20 @@ enum error_code
  * formatted message to `stderr`, then terminates the process with @p Code via
  * `exit()`.
  *
- * @param Code Exit status or @ref error_code value.
+ * @param Code Exit status or @ref error_code value. Evaluated multiple times
+ *             (once for logging, once for exit).
  * @param Fmt  `printf`-style format string literal.
  * @param ...  One or more arguments corresponding to format specifiers in
  *             @p Fmt.
  *
  * @note For plain messages without format arguments, use @ref THROW_ERROR.
  *
+ * @warning Expands to multiple statements; enclose in `{ ... }` inside
+ *          unbraced `if`/`else`/`for`/`while` bodies.
+ *
  * @code{.c}
  * THROW_ERROR_FMT(ERR_INVALID_ARGUMENT, "Invalid index: %zu", idx);
- * THROW_ERROR_FMT(res.status, "Operation failed: %s", GET_RESULT_ERR(res));
+ * THROW_ERROR_FMT(res.status, "Operation failed: %s", res.value.err);
  * @endcode
  */
 #define THROW_ERROR_FMT(Code, Fmt, ...)                                        \
@@ -97,12 +101,16 @@ enum error_code
  * Expands to `THROW_ERROR_FMT(Code, "%s", Msg)` so runtime strings are
  * printed safely without format-string interpretation.
  *
- * @param Code Exit status or @ref error_code value.
+ * @param Code Exit status or @ref error_code value. Evaluated multiple times
+ *             (once for logging, once for exit).
  * @param Msg  Null-terminated error message string (`const char *`).
+ *
+ * @warning Expands to multiple statements; enclose in `{ ... }` inside
+ *          unbraced `if`/`else`/`for`/`while` bodies.
  *
  * @code{.c}
  * THROW_ERROR(ERR_MEMORY_ERROR, "Out of memory");
- * THROW_ERROR(res.status, GET_RESULT_ERR(res));
+ * THROW_ERROR(res.status, res.value.err);
  * @endcode
  */
 #define THROW_ERROR(Code, Msg) THROW_ERROR_FMT(Code, "%s", Msg)
@@ -118,6 +126,10 @@ enum error_code
  * @param Fmt  `printf`-style format string literal describing the assertion
  * failure.
  * @param ...  Arguments corresponding to format specifiers in @p Fmt.
+ *
+ * @warning Expands to an `if` statement without `do { ... } while (0)`.
+ *          Enclose in `{ ... }` inside unbraced `if` branches followed by
+ *          an `else` to prevent dangling `else` ambiguities.
  *
  * @code{.c}
  * ASSERT_FMT(ptr != NULL, "Pointer %s was NULL", "ptr");
@@ -138,6 +150,10 @@ enum error_code
  *
  * @param Cond Expression evaluating to a boolean condition.
  * @param Msg  Null-terminated error message string describing the failure.
+ *
+ * @warning Expands to an `if` statement without `do { ... } while (0)`.
+ *          Enclose in `{ ... }` inside unbraced `if` branches followed by
+ *          an `else` to prevent dangling `else` ambiguities.
  *
  * @code{.c}
  * ASSERT(len > 0, "Length must be strictly positive");

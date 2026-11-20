@@ -178,7 +178,7 @@ static void child_or_else_rethrow(void)
     GET_RESULT_OK_OR_ELSE(int, x, divide(1, 0),
                           THROW_ERROR_FMT(x_result.status,
                                           "Result error msg: %s",
-                                          GET_RESULT_ERR(x_result));)
+                                          x_result.value.err);)
     (void)x;
 }
 
@@ -188,6 +188,15 @@ static void child_or_else_unhandled_throws(void)
     /* Falling through without recovering or transferring control must throw */
     GET_RESULT_OK_OR_ELSE(int, x, divide(1, 0), { (void)0; })
     (void)x;
+}
+
+static void child_or_else_named_unhandled_throws(void)
+{
+    struct point pt;
+    /* Falling through without recovering or transferring control must throw */
+    GET_RESULT_OK_NAMED_OR_ELSE(struct point, pt, fail_point(), point,
+                                { (void)0; })
+    (void)pt;
 }
 
 static void child_get_result_err_on_ok_throws(void)
@@ -202,14 +211,6 @@ static void child_get_result_err_named_on_ok_throws(void)
     const char *err_msg;
     GET_RESULT_ERR_NAMED(struct point, err_msg,
                          RESULT_OK(point, ((struct point){ 1, 2 })), point)
-    (void)err_msg;
-}
-
-static void child_get_result_err_4arg_on_ok_throws(void)
-{
-    const char *err_msg;
-    GET_RESULT_ERR(struct point, err_msg,
-                   RESULT_OK(point, ((struct point){ 1, 2 })), point)
     (void)err_msg;
 }
 
@@ -408,7 +409,7 @@ static int helper_or_else_inspect(int denom, enum error_code *out_code,
     int q;
     GET_RESULT_OK_OR_ELSE(int, q, divide(10, denom), {
         *out_code = q_result.status;
-        *out_msg = GET_RESULT_ERR(q_result);
+        *out_msg = q_result.value.err;
         return -99;
     })
     return q;
@@ -422,7 +423,7 @@ static void test_get_result_variants(void)
     assert(helper_block_with_commas(0) == -15);
     assert(helper_unparenthesized_commas(0) == -7);
 
-    /* Inspecting Var##_result.status and GET_RESULT_ERR(Var##_result) */
+    /* Inspecting Var##_result.status and Var##_result.value.err */
     enum error_code seen_code = ERR_NO_ERROR;
     const char *seen_msg = NULL;
     assert(helper_or_else_inspect(0, &seen_code, &seen_msg) == -99);
@@ -459,12 +460,12 @@ static void test_get_result_variants(void)
                           { recovered_result = RESULT_OK(int, 123); })
     assert(recovered == 123);
 
-    /* NULL error message preserved via GET_RESULT_ERR */
+    /* NULL error message preserved */
     bool saw_null = false;
     int z;
     GET_RESULT_OK_OR_ELSE(int, z, fail_null_msg(), {
         saw_null = (z_result.status == ERR_MEMORY_ERROR
-                    && GET_RESULT_ERR(z_result) == NULL);
+                    && z_result.value.err == NULL);
         z_result = RESULT_OK(int, 0);
     })
     assert(saw_null && z == 0);
@@ -544,15 +545,26 @@ static void test_get_result_variants(void)
     GET_RESULT_ERR_NAMED(struct point, unwrap_named_err, fail_point(), point)
     assert(strcmp(unwrap_named_err, "Point creation failed") == 0);
 
-    const char *unwrap_4arg_err;
-    GET_RESULT_ERR(struct point, unwrap_4arg_err, fail_point(), point)
-    assert(strcmp(unwrap_4arg_err, "Point creation failed") == 0);
+    /* Unwrapping NULL error message with GET_RESULT_ERR and GET_RESULT_ERR_NAMED */
+    const char *null_err_msg = "non-null";
+    GET_RESULT_ERR(int, null_err_msg, fail_null_msg())
+    assert(null_err_msg == NULL);
+
+    const char *null_named_err_msg = "non-null";
+    GET_RESULT_ERR_NAMED(struct point, null_named_err_msg,
+                         RESULT_ERR(point, ERR_MEMORY_ERROR, NULL), point)
+    assert(null_named_err_msg == NULL);
 
     /* Single evaluation of Expr */
     side_effect_calls = 0;
     int once_ok;
     GET_RESULT_OK(int, once_ok, counted_ok(11))
     assert(once_ok == 11 && side_effect_calls == 1);
+
+    side_effect_calls = 0;
+    int once_named_ok;
+    GET_RESULT_OK_NAMED(int, once_named_ok, counted_ok(42), int)
+    assert(once_named_ok == 42 && side_effect_calls == 1);
 
     side_effect_calls = 0;
     GET_RESULT_OK_OR(int, once_err, counted_err(), 55)
@@ -563,6 +575,13 @@ static void test_get_result_variants(void)
     const char *once_err_eval;
     GET_RESULT_ERR(int, once_err_eval, counted_err())
     assert(strcmp(once_err_eval, "counted failure") == 0
+           && side_effect_calls == 1);
+
+    /* Single evaluation of Expr in GET_RESULT_ERR_NAMED */
+    side_effect_calls = 0;
+    const char *once_named_err;
+    GET_RESULT_ERR_NAMED(int, once_named_err, counted_err(), int)
+    assert(strcmp(once_named_err, "counted failure") == 0
            && side_effect_calls == 1);
 
     /* Control flow: continue, break, and goto inside handlers */
@@ -624,16 +643,16 @@ static void test_throwing_paths(void)
     assert(code == ERR_RESULT_IS_ERR);
     assert(strstr(buf, "is still an error type but should not be") != NULL);
 
+    code = run_expect_exit(child_or_else_named_unhandled_throws, buf,
+                           sizeof(buf));
+    assert(code == ERR_RESULT_IS_ERR);
+    assert(strstr(buf, "is still an error type but should not be") != NULL);
+
     code = run_expect_exit(child_get_result_err_on_ok_throws, buf, sizeof(buf));
     assert(code == ERR_RESULT_IS_OK);
     assert(strstr(buf, "to get err of") != NULL);
 
     code = run_expect_exit(child_get_result_err_named_on_ok_throws, buf,
-                           sizeof(buf));
-    assert(code == ERR_RESULT_IS_OK);
-    assert(strstr(buf, "to get err of") != NULL);
-
-    code = run_expect_exit(child_get_result_err_4arg_on_ok_throws, buf,
                            sizeof(buf));
     assert(code == ERR_RESULT_IS_OK);
     assert(strstr(buf, "to get err of") != NULL);

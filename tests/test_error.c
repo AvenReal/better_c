@@ -209,12 +209,12 @@ static void test_throwing_and_diagnostics(void)
     /* Plain ASSERT failure */
     code = run_expect_exit(child_assert_fails, buf, sizeof(buf));
     assert(code == ERR_ASSERT_FAILED);
-    assert(strstr(buf, "assert plain message") != NULL);
+    assert(strstr(buf, "Assertion: (1 == 0) failed: assert plain message") != NULL);
 
     /* Formatted ASSERT_FMT failure */
     code = run_expect_exit(child_assert_fmt_fails, buf, sizeof(buf));
     assert(code == ERR_ASSERT_FAILED);
-    assert(strstr(buf, "assert fmt message: 42") != NULL);
+    assert(strstr(buf, "Assertion: (1 == 0) failed: assert fmt message: 42") != NULL);
 
     /* PRINT_STDERR */
     code = run_expect_exit(child_print_stderr, buf, sizeof(buf));
